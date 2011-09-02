@@ -1,0 +1,35 @@
+development:
+  adapter: postgresql
+  host: localhost
+  port: 5432
+  database: carrier
+  username: postgres
+  password: postgres
+  schema_search_path: public
+  encoding: utf8
+  template: template0
+
+test: &test
+  adapter: postgresql
+  host: localhost
+  port: 5432
+  database: distant_test
+  username: postgres
+  password: postgres
+  schema_search_path: public
+  encoding: utf8
+  template: template0
+
+production:
+  adapter: postgresql
+  host: localhost
+  port: 5432
+  database: eidogram_distant
+  username: pgsql 
+  password: pgsql 
+  schema_search_path: public
+  encoding: utf8
+  template: template0
+
+cucumber:
+  <<: *test

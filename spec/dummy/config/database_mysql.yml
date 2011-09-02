@@ -1,0 +1,29 @@
+development:
+  adapter: mysql2
+  host: localhost
+  database: carrier
+  username: root 
+  password: root
+  encoding: utf8
+
+test: &test
+  adapter: mysql2
+  host: localhost
+  database: carrier_test
+  username: root
+  password: root
+  encoding: utf8
+
+production:
+  adapter: mysql2
+  host: localhost
+  port: 5432
+  database: eidogram_distant
+  username: pgsql 
+  password: pgsql 
+  schema_search_path: public
+  encoding: utf8
+  template: template0
+
+cucumber:
+  <<: *test
