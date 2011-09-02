@@ -1,4 +1,6 @@
 class User < ActiveRecord::Base
+  serialize :roles, Array
+
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 

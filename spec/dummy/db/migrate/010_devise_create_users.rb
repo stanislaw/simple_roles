@@ -12,7 +12,8 @@ class DeviseCreateUsers < ActiveRecord::Migration
 
       t.string  :name
       t.string  :username
-
+       
+      t.string :roles, :default => [].to_yaml
       t.timestamps
     end
 
