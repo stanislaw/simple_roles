@@ -12,7 +12,7 @@ gem 'rake-kit'
 gem 'require_all'
 
 gem 'sugar-high'
-
+gem 'sweetloader'
 group :development, :test do
   gem 'cutter'
 end
