@@ -13,8 +13,10 @@ gem 'require_all'
 
 gem 'sugar-high'
 gem 'sweetloader'
+
 group :development, :test do
   gem 'cutter'
+  gem 'rails'
 end
 
 group :test do

@@ -6,7 +6,7 @@ development:
   password: root
   encoding: utf8
 
-test: &test
+test:
   adapter: mysql2
   host: localhost
   database: simple_roles_test
@@ -24,6 +24,3 @@ production:
   schema_search_path: public
   encoding: utf8
   template: template0
-
-cucumber:
-  <<: *test
