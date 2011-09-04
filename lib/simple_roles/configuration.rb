@@ -6,7 +6,7 @@ module SimpleRoles
       attr_accessor :valid_roles
  
       def valid_roles= vr
-        raise if !vr.kind_of?(Array)
+        raise "There should be an array of valid roles" if !vr.kind_of?(Array)
         @valid_roles = vr
       end
 

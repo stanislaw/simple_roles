@@ -8,4 +8,10 @@ require_all File.expand_path("../../app", __FILE__)
 
 module SimpleRoles
   autoload_modules :Base, :Configuration
+
+  class << self
+    def configure &block
+      yield SimpleRoles::Configuration
+    end
+  end
 end
