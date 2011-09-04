@@ -21,14 +21,6 @@ gem 'simple_roles', :git => "git://github.com/stanislaw/simple_roles.git"
 bundle update
 </pre>
 
-h3. Copy SimpleRoles migrations by following rake task:
-
-@rake simple_roles_engine:install:migrations@
-
-And run
-
-@rake db:migrate@
-
 h3. Set up valid roles you're gonna have in your app
 
 Create file simple_roles.rb in config/initializers and write there:
@@ -39,6 +31,15 @@ SimpleRoles.configure do |config|
   config.valid_roles = [:user, :admin, :editor]
 end
 </pre>
+
+h3. Copy and migrate SimpleRoles migrations by following rake task:
+
+<pre>
+rake simple_roles_engine:install:migrations
+rake db:migrate
+</pre>
+
+Note! Migrations are based on roles you set up as valid (see previous step). If you do not create initializer with valid_roles, then roles will be set up to defaults: :user and :admin.
 
 h3. And finally include 'simple_roles' macros in your User model:
 
