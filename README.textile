@@ -39,7 +39,7 @@ rake simple_roles_engine:install:migrations
 rake db:migrate
 </pre>
 
-Note! Migrations are based on roles you set up as valid (see previous step). If you do not create initializer with valid_roles, then roles will be set up to defaults: :user and :admin.
+Note! Migrations are based on roles you set up as valid (see previous step). If you do not create initializer with valid_roles, then valid_roles will be set up to defaults: :user and :admin.
 
 h3. And finally include 'simple_roles' macros in your User model:
 
@@ -87,5 +87,6 @@ h2. Todo:
 
 * Write role groups part
 * Provide some more config options
+* Usage section in this Readme ;).
 * More and better tests
 
