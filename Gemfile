@@ -17,6 +17,7 @@ gem 'sugar-high'
 gem 'sweetloader'
 
 group :development, :test do
+  gem 'jeweler'
   gem 'cutter'
   gem 'rails'
 end

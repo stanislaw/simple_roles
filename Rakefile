@@ -12,6 +12,20 @@ rescue LoadError
   RDoc::Task = Rake::RDocTask
 end
 
+require 'jeweler'
+Jeweler::Tasks.new do |gem|
+  # gem is a Gem::Specification... see http://docs.rubygems.org/read/chapter/20 for more options
+  gem.name = "simple_roles"
+  gem.homepage = "http://github.com/stanislaw/simple_roles"
+  gem.license = "MIT"
+  gem.summary = %Q{Rails Engine providing Role System for Rails apps}
+  gem.description = %Q{Simple Role System for Rails Apps}
+  gem.email = "s.pankevich@gmail.com"
+  gem.authors = ["stanislaw"]
+  # dependencies defined in Gemfile
+end
+Jeweler::RubygemsDotOrgTasks.new
+
 RDoc::Task.new(:rdoc) do |rdoc|
   rdoc.rdoc_dir = 'rdoc'
   rdoc.title    = 'SimpleRoles'
