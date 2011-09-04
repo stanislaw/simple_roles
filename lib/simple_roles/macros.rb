@@ -1,7 +1,6 @@
 module SimpleRoles
   module Macros
     def self.included(base)
-      puts "Macros included into #{base}"
     end
 
     def simple_roles &block

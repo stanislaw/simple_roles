@@ -1,0 +1,6 @@
+adapter: mysql2
+host: localhost
+database: simple_roles_test
+username: root
+password: root
+encoding: utf8
