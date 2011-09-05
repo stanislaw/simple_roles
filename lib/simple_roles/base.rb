@@ -81,14 +81,6 @@ module SimpleRoles
         replace real_roles
       end
 
-      def self 
-        raise "wt!"
-      end
-
-      def [] *args
-        raise "wtf!"
-      end
-
       def roles
         self
       end
