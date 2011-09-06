@@ -31,6 +31,7 @@ describe SimpleRoles::Base do
         user.roles_list.should be_empty
         user.roles << :admin
         user.db_roles.should include(admin_role)
+        user.roles_list.should include(:admin)
         user.roles.roles.should include(:admin)
         user.has_role?(:admin).should be_true
         user.has_roles?(:admin).should be_true

@@ -28,6 +28,12 @@ module SimpleRoles
       #  end
       #end
 
+      def roles
+        roles_array 
+      end
+
+      alias_method :roles_list, :roles
+
       def has_roles? *rolez
         rolez.flatten!
         rolez.each do |role|
@@ -37,18 +43,6 @@ module SimpleRoles
       end
 
       alias_method :has_role?, :has_roles?
-
-      def roles_array
-        @roles_array ||= RolesArray.new self
-      end
-
-      def roles
-        roles_array 
-      end
-
-      def roles_list
-        roles.roles
-      end
 
       def add_role *rolez
         roles_array.add *rolez
@@ -65,7 +59,11 @@ module SimpleRoles
       end
 
       private
-   
+
+      def roles_array
+        @roles_array ||= RolesArray.new self
+      end
+
     end
 
     class RolesArray < Array
