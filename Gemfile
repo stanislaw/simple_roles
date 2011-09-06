@@ -4,11 +4,7 @@ source "http://rubygems.org"
 # Bundler will treat runtime dependencies like base dependencies, and
 # development dependencies will be added by default to the :development group.
 gemspec
-
 gem 'activerecord'
-
-gem 'devise'
-gem 'mysql2'
 
 gem 'rake-kit'
 gem 'require_all'
@@ -17,12 +13,11 @@ gem 'sugar-high'
 gem 'sweetloader'
 
 group :development, :test do
+  gem 'devise'
+  gem 'mysql2'
   gem 'jeweler'
   gem 'cutter'
   gem 'rails'
-end
-
-group :test do
   gem 'rspec-rails'
   gem 'capybara'
   gem 'factory_girl'
