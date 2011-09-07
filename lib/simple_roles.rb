@@ -1,5 +1,6 @@
 require "sweetloader"
 require "require_all"
+require "sugar-high/array"
 
 require "simple_roles/engine" if defined?(Rails)
 require "simple_roles/macros"

@@ -92,7 +92,7 @@ module SimpleRoles
       end
 
       def roles= *r
-        r.flatten!
+        r.flatten!.to_symbols_uniq!
         raise "Not a valid role!" if (r - SimpleRoles::Configuration.valid_roles).size > 0
         a = (r - roles)
         base.db_roles = a.map do |rolle|
