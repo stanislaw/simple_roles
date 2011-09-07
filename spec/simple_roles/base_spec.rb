@@ -25,6 +25,23 @@ describe SimpleRoles::Base do
     end
 
     context "Integration for roles methods" do
+      it "should add :roles to accessible_attributes if they are Whitelisted" do
+        user = User.new(:name => "stanislaw")
+        user.roles << :admin
+        user.roles_list.should include(:admin)
+        user.save!
+        User.find_by_name("stanislaw").should be_kind_of(User)
+        User.delete_all
+
+        User.attr_accessible :name
+        
+        user = User.new(:name => "stanislaw")
+        user.roles << :admin
+        user.roles_list.should include(:admin)
+        user.save!
+        User.find_by_name("stanislaw").should be_kind_of(User)
+      end
+      
       it "should all work" do
         admin_role = Role.find_by_name("admin")
         user = User.new(:name => "stanislaw")
@@ -34,11 +51,13 @@ describe SimpleRoles::Base do
         user.roles_list.should include(:admin)
         user.roles.roles.should include(:admin)
         user.has_role?(:admin).should be_true
+        user.admin?.should be_true
+        user.is_admin?.should be_true
         user.has_roles?(:admin).should be_true
         user.save!
         user.db_roles.should include(admin_role)
         user.roles.should include(:admin)
-        user = User.find_by_name "stanislaw"
+        user = User.find_by_name! "stanislaw"
         user.roles.should include(:admin)
         user.roles.remove(:admin)
         user.roles.should == []

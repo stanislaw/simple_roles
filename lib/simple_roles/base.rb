@@ -22,12 +22,10 @@ module SimpleRoles
         base.send :extend, ClassMethods
       end
 
-      #SimpleRoles::Configuration.valid_roles.each do |role|
-      #  define_method :"#{role}?" do
-      #    roles.include?(:"#{role}")
-      #  end
-      #end
-
+      def mass_assignment_authorizer *args
+        super.empty? ? super : (super + [:roles])
+      end
+      
       def roles
         roles_array 
       end
@@ -43,6 +41,15 @@ module SimpleRoles
       end
 
       alias_method :has_role?, :has_roles?
+
+      SimpleRoles::Configuration.valid_roles.each do |role|
+        define_method :"#{role}?" do
+          roles.include?(:"#{role}")
+        end
+
+        alias_method :"is_#{role}?", :"#{role}?"
+      end
+
 
       def add_role *rolez
         roles_array.add *rolez
@@ -96,7 +103,11 @@ module SimpleRoles
         raise "Not a valid role!" if (r - SimpleRoles::Configuration.valid_roles).size > 0
         a = (r - roles)
         base.db_roles = a.map do |rolle|
-          Role.find_by_name(rolle.to_s)
+          begin
+            Role.find_by_name!(rolle.to_s)
+          rescue
+            raise "Couldn't find Role for #{rolle}. Maybe you need to re-run migrations?"
+          end
         end
         base.save!
         synchronize
