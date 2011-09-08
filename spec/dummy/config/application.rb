@@ -3,6 +3,8 @@ require File.expand_path('../boot', __FILE__)
 require 'rails/all'
 
 Bundler.require
+
+require 'devise'
 require "simple_roles"
 
 module Dummy
