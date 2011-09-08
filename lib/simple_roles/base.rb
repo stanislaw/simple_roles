@@ -75,7 +75,7 @@ module SimpleRoles
 
     class RolesArray < Array
 
-      attr_reader :base, :roles
+      attr_reader :base
 
       def initialize base
         @base = base
@@ -86,10 +86,6 @@ module SimpleRoles
         replace real_roles
       end
 
-      def roles
-        self
-      end
-
       def real_roles_db
         base.db_roles
       end
@@ -98,11 +94,10 @@ module SimpleRoles
         real_roles_db.map(&:name).map(&:to_sym)
       end
 
-      def roles= *r
-        r.flatten!.to_symbols_uniq!
-        raise "Not a valid role!" if (r - SimpleRoles::Configuration.valid_roles).size > 0
-        a = (r - roles)
-        base.db_roles = a.map do |rolle|
+      def roles= *rolez
+        rolez.flatten!.to_symbols_uniq!
+        raise "Not a valid role!" if (rolez - SimpleRoles::Configuration.valid_roles).size > 0
+        base.db_roles = rolez.map do |rolle|
           begin
             Role.find_by_name!(rolle.to_s)
           rescue
@@ -113,13 +108,13 @@ module SimpleRoles
       end
 
       def << *args
-        self.roles = roles | args
+        self.roles = self | args
       end
 
       alias_method :add, :<<
 
       def remove *role
-        self.roles = roles - role
+        self.roles = self - role
       end
 
       def clear

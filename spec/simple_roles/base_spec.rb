@@ -49,7 +49,7 @@ describe SimpleRoles::Base do
         user.roles << :admin
         user.db_roles.should include(admin_role)
         user.roles_list.should include(:admin)
-        user.roles.roles.should include(:admin)
+        user.roles.should include(:admin)
         user.has_role?(:admin).should be_true
         user.admin?.should be_true
         user.is_admin?.should be_true
@@ -61,7 +61,6 @@ describe SimpleRoles::Base do
         user.roles.should include(:admin)
         user.roles.remove(:admin)
         user.roles.should == []
-        user.roles.roles.should == []
         user.save!
         user.roles.should == []
         user.roles = [:admin, :user]
@@ -72,9 +71,9 @@ describe SimpleRoles::Base do
         user.roles.should be_empty
         user.roles << :admin
         user.db_roles.should include(admin_role)
-        user.roles.roles.should include(:admin)
+        user.roles.should include(:admin)
         user.add_role :user
-        user.roles.roles.should include(:user)
+        user.roles.should include(:user, :admin)
       end
     end
   end
