@@ -109,7 +109,6 @@ module SimpleRoles
             raise "Couldn't find Role for #{rolle}. Maybe you need to re-run migrations?"
           end
         end
-        base.save!
         synchronize
       end
 
