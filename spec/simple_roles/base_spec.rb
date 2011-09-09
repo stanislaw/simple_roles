@@ -24,10 +24,19 @@ describe SimpleRoles::Base do
       its(:"#{meth}") { should be_empty }
     end
 
+    context "#roles" do
+      it "call on #roles.clear should raise error" do
+        lambda { 
+          roles.clear
+        }.should raise_error
+      end
+    end
+
     context "Integration for roles methods" do
       it "should add :roles to accessible_attributes if they are Whitelisted" do
         user = User.new(:name => "stanislaw")
         user.roles << :admin
+
         user.roles_list.should include(:admin)
         user.save!
         User.find_by_name!("stanislaw").should be_kind_of(User)
@@ -41,7 +50,7 @@ describe SimpleRoles::Base do
         user.save!
         User.find_by_name!("stanislaw").should be_kind_of(User)
       end
-      
+     
       it "should all work" do
         admin_role = Role.find_by_name("admin")
         user = User.new(:name => "stanislaw")
@@ -61,14 +70,16 @@ describe SimpleRoles::Base do
         user = User.find_by_name! "stanislaw"
         user.roles.should include(:admin)
         user.roles.remove(:admin)
-        user.roles.should == []
+        user.roles.should be_empty
         user.save!
-        user.roles.should == []
+        user.roles.should be_empty
         user.roles = [:admin, :user]
-        user.roles.should == [:admin, :user]
+        user.roles.should == Set.new([:admin, :user])
         user.has_role?(:admin, :user).should be_true
         user.has_roles?([:admin, :user]).should be_true
-        user.roles.clear
+        user.db_roles.size.should == 2
+        user.roles.clear!
+        user.db_roles.should be_empty
         user.roles.should be_empty
         user.roles << :admin
         user.db_roles.should include(admin_role)
@@ -79,7 +90,6 @@ describe SimpleRoles::Base do
         user.has_any_role?(:user, :admin).should be_true
         user.has_any_role?([:user, :admin])
         user.has_any_role?(:blip).should be_false
-
       end
     end
   end
