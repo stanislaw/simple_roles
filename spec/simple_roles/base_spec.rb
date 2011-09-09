@@ -30,7 +30,7 @@ describe SimpleRoles::Base do
         user.roles << :admin
         user.roles_list.should include(:admin)
         user.save!
-        User.find_by_name("stanislaw").should be_kind_of(User)
+        User.find_by_name!("stanislaw").should be_kind_of(User)
         User.delete_all
 
         User.attr_accessible :name
@@ -39,13 +39,14 @@ describe SimpleRoles::Base do
         user.roles << :admin
         user.roles_list.should include(:admin)
         user.save!
-        User.find_by_name("stanislaw").should be_kind_of(User)
+        User.find_by_name!("stanislaw").should be_kind_of(User)
       end
       
       it "should all work" do
         admin_role = Role.find_by_name("admin")
         user = User.new(:name => "stanislaw")
         user.roles_list.should be_empty
+        user.has_any_role?(:admin).should be_false
         user.roles << :admin
         user.db_roles.should include(admin_role)
         user.roles_list.should include(:admin)
@@ -74,6 +75,11 @@ describe SimpleRoles::Base do
         user.roles.should include(:admin)
         user.add_role :user
         user.roles.should include(:user, :admin)
+        user.has_any_role?(:user).should be_true
+        user.has_any_role?(:user, :admin).should be_true
+        user.has_any_role?([:user, :admin])
+        user.has_any_role?(:blip).should be_false
+
       end
     end
   end

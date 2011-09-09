@@ -42,6 +42,14 @@ module SimpleRoles
 
       alias_method :has_role?, :has_roles?
 
+      def has_any_role? *rolez
+        rolez.flatten!
+        rolez.each do |role|
+          return true if roles.include? role
+        end
+        false 
+      end
+
       SimpleRoles::Configuration.valid_roles.each do |role|
         define_method :"#{role}?" do
           roles.include?(:"#{role}")
