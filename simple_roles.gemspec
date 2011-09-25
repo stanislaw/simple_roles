@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = %q{simple_roles}
-  s.version = "0.0.1"
+  s.version = "0.0.2"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = [%q{stanislaw}]
-  s.date = %q{2011-09-06}
+  s.date = %q{2011-09-25}
   s.description = %q{Simple Role System for Rails Apps}
   s.email = %q{s.pankevich@gmail.com}
   s.extra_rdoc_files = [
@@ -30,7 +30,6 @@ Gem::Specification.new do |s|
     "app/mailers/.gitkeep",
     "app/models/.gitkeep",
     "app/models/role.rb",
-    "app/models/user.rb",
     "app/models/user_role.rb",
     "app/views/.gitkeep",
     "config/routes.rb",
@@ -167,6 +166,14 @@ Gem::Specification.new do |s|
       s.add_development_dependency(%q<rspec-rails>, [">= 0"])
       s.add_development_dependency(%q<capybara>, [">= 0"])
       s.add_development_dependency(%q<factory_girl>, [">= 0"])
+      s.add_development_dependency(%q<devise>, [">= 0"])
+      s.add_development_dependency(%q<mysql2>, [">= 0"])
+      s.add_development_dependency(%q<jeweler>, [">= 0"])
+      s.add_development_dependency(%q<cutter>, [">= 0"])
+      s.add_development_dependency(%q<rails>, [">= 0"])
+      s.add_development_dependency(%q<rspec-rails>, [">= 0"])
+      s.add_development_dependency(%q<capybara>, [">= 0"])
+      s.add_development_dependency(%q<factory_girl>, [">= 0"])
     else
       s.add_dependency(%q<simple_roles>, [">= 0"])
       s.add_dependency(%q<activerecord>, [">= 0"])
@@ -178,6 +185,14 @@ Gem::Specification.new do |s|
       s.add_dependency(%q<jeweler>, [">= 0"])
       s.add_dependency(%q<cutter>, [">= 0"])
       s.add_dependency(%q<rails>, [">= 0"])
+      s.add_dependency(%q<devise>, [">= 0"])
+      s.add_dependency(%q<mysql2>, [">= 0"])
+      s.add_dependency(%q<jeweler>, [">= 0"])
+      s.add_dependency(%q<cutter>, [">= 0"])
+      s.add_dependency(%q<rails>, [">= 0"])
+      s.add_dependency(%q<rspec-rails>, [">= 0"])
+      s.add_dependency(%q<capybara>, [">= 0"])
+      s.add_dependency(%q<factory_girl>, [">= 0"])
       s.add_dependency(%q<devise>, [">= 0"])
       s.add_dependency(%q<mysql2>, [">= 0"])
       s.add_dependency(%q<jeweler>, [">= 0"])
@@ -198,6 +213,14 @@ Gem::Specification.new do |s|
     s.add_dependency(%q<jeweler>, [">= 0"])
     s.add_dependency(%q<cutter>, [">= 0"])
     s.add_dependency(%q<rails>, [">= 0"])
+    s.add_dependency(%q<devise>, [">= 0"])
+    s.add_dependency(%q<mysql2>, [">= 0"])
+    s.add_dependency(%q<jeweler>, [">= 0"])
+    s.add_dependency(%q<cutter>, [">= 0"])
+    s.add_dependency(%q<rails>, [">= 0"])
+    s.add_dependency(%q<rspec-rails>, [">= 0"])
+    s.add_dependency(%q<capybara>, [">= 0"])
+    s.add_dependency(%q<factory_girl>, [">= 0"])
     s.add_dependency(%q<devise>, [">= 0"])
     s.add_dependency(%q<mysql2>, [">= 0"])
     s.add_dependency(%q<jeweler>, [">= 0"])
