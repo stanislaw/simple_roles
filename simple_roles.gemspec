@@ -5,7 +5,7 @@
 
 Gem::Specification.new do |s|
   s.name = %q{simple_roles}
-  s.version = "0.0.2"
+  s.version = "0.0.3"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = [%q{stanislaw}]
@@ -13,13 +13,13 @@ Gem::Specification.new do |s|
   s.description = %q{Simple Role System for Rails Apps}
   s.email = %q{s.pankevich@gmail.com}
   s.extra_rdoc_files = [
-    "README.textile"
+    "README.md"
   ]
   s.files = [
     ".rspec",
     "Gemfile",
     "MIT-LICENSE",
-    "README.textile",
+    "README.md",
     "Rakefile",
     "VERSION",
     "app/assets/images/simple_roles/.gitkeep",
@@ -104,8 +104,8 @@ Gem::Specification.new do |s|
     "spec/dummy/config/locales/en.yml",
     "spec/dummy/config/routes.rb",
     "spec/dummy/db/migrate/010_devise_create_users.rb",
-    "spec/dummy/db/migrate/20110902230221_create_user_roles.rb",
-    "spec/dummy/db/migrate/20110902230222_create_roles.rb",
+    "spec/dummy/db/migrate/20110925210726_create_user_roles.rb",
+    "spec/dummy/db/migrate/20110925210727_create_roles.rb",
     "spec/dummy/db/schema.rb",
     "spec/dummy/db/seeds.rb",
     "spec/dummy/log/.gitkeep",
@@ -148,24 +148,11 @@ Gem::Specification.new do |s|
     s.specification_version = 3
 
     if Gem::Version.new(Gem::VERSION) >= Gem::Version.new('1.2.0') then
-      s.add_runtime_dependency(%q<simple_roles>, [">= 0"])
-      s.add_runtime_dependency(%q<activerecord>, [">= 0"])
-      s.add_runtime_dependency(%q<rake-kit>, [">= 0"])
       s.add_runtime_dependency(%q<require_all>, [">= 0"])
       s.add_runtime_dependency(%q<sugar-high>, [">= 0"])
       s.add_runtime_dependency(%q<sweetloader>, [">= 0"])
-      s.add_development_dependency(%q<sqlite3>, [">= 0"])
-      s.add_development_dependency(%q<jeweler>, [">= 0"])
-      s.add_development_dependency(%q<cutter>, [">= 0"])
-      s.add_development_dependency(%q<rails>, [">= 0"])
-      s.add_development_dependency(%q<devise>, [">= 0"])
-      s.add_development_dependency(%q<mysql2>, [">= 0"])
-      s.add_development_dependency(%q<jeweler>, [">= 0"])
-      s.add_development_dependency(%q<cutter>, [">= 0"])
-      s.add_development_dependency(%q<rails>, [">= 0"])
-      s.add_development_dependency(%q<rspec-rails>, [">= 0"])
-      s.add_development_dependency(%q<capybara>, [">= 0"])
-      s.add_development_dependency(%q<factory_girl>, [">= 0"])
+      s.add_development_dependency(%q<activerecord>, [">= 0"])
+      s.add_development_dependency(%q<rake-kit>, [">= 0"])
       s.add_development_dependency(%q<devise>, [">= 0"])
       s.add_development_dependency(%q<mysql2>, [">= 0"])
       s.add_development_dependency(%q<jeweler>, [">= 0"])
@@ -175,24 +162,11 @@ Gem::Specification.new do |s|
       s.add_development_dependency(%q<capybara>, [">= 0"])
       s.add_development_dependency(%q<factory_girl>, [">= 0"])
     else
-      s.add_dependency(%q<simple_roles>, [">= 0"])
-      s.add_dependency(%q<activerecord>, [">= 0"])
-      s.add_dependency(%q<rake-kit>, [">= 0"])
       s.add_dependency(%q<require_all>, [">= 0"])
       s.add_dependency(%q<sugar-high>, [">= 0"])
       s.add_dependency(%q<sweetloader>, [">= 0"])
-      s.add_dependency(%q<sqlite3>, [">= 0"])
-      s.add_dependency(%q<jeweler>, [">= 0"])
-      s.add_dependency(%q<cutter>, [">= 0"])
-      s.add_dependency(%q<rails>, [">= 0"])
-      s.add_dependency(%q<devise>, [">= 0"])
-      s.add_dependency(%q<mysql2>, [">= 0"])
-      s.add_dependency(%q<jeweler>, [">= 0"])
-      s.add_dependency(%q<cutter>, [">= 0"])
-      s.add_dependency(%q<rails>, [">= 0"])
-      s.add_dependency(%q<rspec-rails>, [">= 0"])
-      s.add_dependency(%q<capybara>, [">= 0"])
-      s.add_dependency(%q<factory_girl>, [">= 0"])
+      s.add_dependency(%q<activerecord>, [">= 0"])
+      s.add_dependency(%q<rake-kit>, [">= 0"])
       s.add_dependency(%q<devise>, [">= 0"])
       s.add_dependency(%q<mysql2>, [">= 0"])
       s.add_dependency(%q<jeweler>, [">= 0"])
@@ -203,24 +177,11 @@ Gem::Specification.new do |s|
       s.add_dependency(%q<factory_girl>, [">= 0"])
     end
   else
-    s.add_dependency(%q<simple_roles>, [">= 0"])
-    s.add_dependency(%q<activerecord>, [">= 0"])
-    s.add_dependency(%q<rake-kit>, [">= 0"])
     s.add_dependency(%q<require_all>, [">= 0"])
     s.add_dependency(%q<sugar-high>, [">= 0"])
     s.add_dependency(%q<sweetloader>, [">= 0"])
-    s.add_dependency(%q<sqlite3>, [">= 0"])
-    s.add_dependency(%q<jeweler>, [">= 0"])
-    s.add_dependency(%q<cutter>, [">= 0"])
-    s.add_dependency(%q<rails>, [">= 0"])
-    s.add_dependency(%q<devise>, [">= 0"])
-    s.add_dependency(%q<mysql2>, [">= 0"])
-    s.add_dependency(%q<jeweler>, [">= 0"])
-    s.add_dependency(%q<cutter>, [">= 0"])
-    s.add_dependency(%q<rails>, [">= 0"])
-    s.add_dependency(%q<rspec-rails>, [">= 0"])
-    s.add_dependency(%q<capybara>, [">= 0"])
-    s.add_dependency(%q<factory_girl>, [">= 0"])
+    s.add_dependency(%q<activerecord>, [">= 0"])
+    s.add_dependency(%q<rake-kit>, [">= 0"])
     s.add_dependency(%q<devise>, [">= 0"])
     s.add_dependency(%q<mysql2>, [">= 0"])
     s.add_dependency(%q<jeweler>, [">= 0"])
