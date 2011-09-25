@@ -4,7 +4,7 @@ SimpleRoles is a Rails Engine providing simple Role System for any Rails 3 app. 
 
 It even seems to be good for being used as a real role system inspite of (or due to ;)) its almost maximum simplicity.
 
-If you are looking to a real serious roles system solution try "Troles":https://github.com/kristianmandrup/troles gem created by "Kristian Mandrup":https://github.com/kristianmandrup
+If you are looking for a real serious roles system solution try "Troles":https://github.com/kristianmandrup/troles gem created by "Kristian Mandrup":https://github.com/kristianmandrup
 
 h2. Installiation
 
@@ -52,35 +52,26 @@ end
 h2. Usage
 
 <pre>
-  admin_role = Role.find_by_name("admin")
-  user = User.new(:name => "stanislaw")
-  user.roles_list.should be_empty
-  user.roles << :admin
-  user.db_roles.should include(admin_role)
-  user.roles.roles.should include(:admin)
-  user.has_role?(:admin).should be_true
-  user.has_roles?(:admin).should be_true
-  user.save!
-  user.db_roles.should include(admin_role)
-  user.roles.should include(:admin)
-  user = User.find_by_name "stanislaw"
-  user.roles.should include(:admin)
-  user.roles.remove(:admin)
-  user.roles.should == []
-  user.roles.roles.should == []
-  user.save!
-  user.roles.should == []
-  user.roles = [:admin, :user]
-  user.roles.should == [:admin, :user]
-  user.has_role?(:admin, :user).should be_true
-  user.has_roles?([:admin, :user]).should be_true
-  user.roles.clear
-  user.roles.should be_empty
-  user.roles << :admin
-  user.db_roles.should include(admin_role)
-  user.roles.roles.should include(:admin)
-  user.add_role :user
-  user.roles.roles.should include(:user)
+user.roles => #<RolesArray: {}>
+
+user.roles = :admin
+user.roles # => #<RolesArray: {:admin}>
+user.roles_list # => #<RolesArray: {:admin}>
+user.admin? # => true
+user.is_admin? # => true
+
+user.roles << :user
+user.roles # => #<RolesArray: {:admin, :user}>
+user.is_user? # => true
+
+user.add_role :user
+user.roles # => #RolesArray: #{:admin, :user, :editor}
+
+user.remove_role :user
+user.roles # => #<RolesArray: {:admin, :editor}
+user.has_role?(:admin) # => true
+user.has_any_role?(:admin, :blip) # => true
+user.has_role?(:blogger) # => false
 </pre>
 
 h2. Todo:
