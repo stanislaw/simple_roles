@@ -1,57 +1,57 @@
-h1. SimpleRoles
+# SimpleRoles
 
-SimpleRoles is a Rails Engine providing simple Role System for any Rails 3 app. It was created as demo role-system to accompany "CanTango gem":https://github.com/kristianmandrup/cantango initial installiation and usage. Intended to be very easy to setup & use.
+SimpleRoles is a Rails Engine providing simple Role System for any Rails 3 app. It was created as demo role-system to accompany [CanTango gem](https://github.com/kristianmandrup/cantango) initial installiation and usage. Intended to be very easy to setup & use.
 
 It even seems to be good for being used as a real role system inspite of (or due to ;)) its almost maximum simplicity.
 
-If you are looking for a real serious roles system solution try "Troles":https://github.com/kristianmandrup/troles gem created by "Kristian Mandrup":https://github.com/kristianmandrup
+If you are looking for a real serious roles system solution try [Troles](https://github.com/kristianmandrup/troles) gem created by [Kristian Mandrup](https://github.com/kristianmandrup)
 
-h2. Installiation
+## Installiation
 
-h3. Prerequisites
+### Prerequisites
 
 SimpleRoles only assumes you have User model
 
-h3. Not a Gem yet
+### Not a Gem yet
 
 include in Gemfile:
 
-<pre>
+```ruby
 gem 'simple_roles', :git => "git://github.com/stanislaw/simple_roles.git"
 bundle update
-</pre>
+```
 
-h3. Set up valid roles you're gonna have in your app
+### Set up valid roles you're gonna have in your app
 
 Create file simple_roles.rb in config/initializers and write there:
 
-<pre>
+```ruby
 # config/initializers/simple_roles.rb
 SimpleRoles.configure do |config|
   config.valid_roles = [:user, :admin, :editor]
 end
-</pre>
+```
 
-h3. Copy and migrate SimpleRoles migrations by following rake task:
+### Copy and migrate SimpleRoles migrations by following rake task:
 
-<pre>
+```ruby
 rake simple_roles_engine:install:migrations
 rake db:migrate
-</pre>
+```
 
 Note! Migrations are based on roles you set up as valid (see previous step). If you do not create initializer with valid_roles, then valid_roles will be set up to defaults: :user and :admin.
 
-h3. And finally include 'simple_roles' macros in your User model:
+### And finally include 'simple_roles' macros in your User model:
 
-<pre>
+```ruby
 class User
   simple_roles
 end
-</pre>
+```
 
-h2. Usage
+## Usage
 
-<pre>
+```ruby
 user.roles => #<RolesArray: {}>
 
 user.roles = :admin
@@ -64,20 +64,18 @@ user.roles << :user
 user.roles # => #<RolesArray: {:admin, :user}>
 user.is_user? # => true
 
-user.add_role :user
-user.roles # => #RolesArray: #{:admin, :user, :editor}
+user.add_role :editor
+user.roles # => #<RolesArray: #{:admin, :user, :editor}>
 
 user.remove_role :user
-user.roles # => #<RolesArray: {:admin, :editor}
+user.roles # => #<RolesArray: {:admin, :editor}>
 user.has_role?(:admin) # => true
 user.has_any_role?(:admin, :blip) # => true
 user.has_role?(:blogger) # => false
-</pre>
+```
 
-h2. Todo:
+## Todo:
 
-* Write role groups part
-* Provide some more config options
-* Usage section in this Readme ;).
-* More and better tests
-
+- Write role groups part
+- Provide some more config options
+- More and better tests
