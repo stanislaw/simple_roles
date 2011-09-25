@@ -58,10 +58,17 @@ module SimpleRoles
         alias_method :"is_#{role}?", :"#{role}?"
       end
 
-
-      def add_role *rolez
+      def add_roles *rolez
         roles_array.add *rolez
       end
+
+      alias_method :add_role, :add_roles
+
+      def remove_roles *rolez
+        roles_array.remove *rolez
+      end
+
+      alias_method :remove_role, :remove_roles
 
       def roles= *rolez
         roles_array.roles = *rolez
@@ -118,14 +125,16 @@ module SimpleRoles
         synchronize
       end
 
-      def << *args
-        self.roles = self.to_a + args
+      def << *rolez
+        rolez.flatten!
+        self.roles = self.to_a + rolez
       end
 
       #alias_method :add, :<<
 
-      def remove *role
-        self.roles = self.to_a - role
+      def remove *rolez
+        rolez.flatten!
+        self.roles = self.to_a - rolez
       end
 
       def clear!
