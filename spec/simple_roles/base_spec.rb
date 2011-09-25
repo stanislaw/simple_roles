@@ -42,13 +42,37 @@ describe SimpleRoles::Base do
       @user ||= User.new(:name => "stanislaw")
     end
 
-    pending do
+    it "#has_role?, #has_roles?" do
+      subject.roles << :admin
+      subject.has_role?(:admin).should be_true
+      subject.has_role?(:admin, :user).should be_false
+      subject.has_roles?(:editor).should be_false
+      subject.roles << :user
+      subject.has_role?(:admin, :user).should be_true
+      subject.has_role?([:admin, :user]).should be_true
+    end
+
+    it "#admin?, #user?, #editor? ..." do
+      subject.roles << :admin
+      subject.admin?.should be_true
+      subject.is_admin?.should be_true
+      subject.user?.should be_false
+      subject.editor?.should be_false
+      subject.roles << :editor
+      subject.editor?.should be_true
     end
   end
   
   context "Write API" do
     subject do
       @user ||= User.new(:name => "stanislaw")
+    end
+
+    it "#roles= should set roles" do
+      subject.roles = :admin
+      subject.roles.should == Set.new([:admin])
+      subject.roles = :user
+      subject.roles.should == Set.new([:user])
     end
 
     it "#roles << should add roles" do

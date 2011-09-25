@@ -50,6 +50,7 @@ module SimpleRoles
         false 
       end
 
+      # TODO: remove duplication in SimpleRoles::Configuration:
       SimpleRoles::Configuration.valid_roles.each do |role|
         define_method :"#{role}?" do
           roles.include?(:"#{role}")
@@ -88,7 +89,7 @@ module SimpleRoles
 
     end
 
-    class RolesArray < Set
+    class ::RolesArray < Set
 
       attr_reader :base
 

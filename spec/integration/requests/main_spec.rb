@@ -11,6 +11,8 @@ describe "Requests" do
     end
 
     it "should get root" do
+      pending
+      
       get '/'
       response.status.should be(200)
     end
