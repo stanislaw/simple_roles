@@ -75,6 +75,13 @@ describe SimpleRoles::Base do
       subject.roles.should == Set.new([:user])
     end
 
+    it "#roles= should set roles if array of strings passed (sh accept strings too!)" do
+      subject.roles = 'admin'
+      subject.roles.should == Set.new([:admin])
+      subject.roles = ['user', 'editor']
+      subject.roles.should == Set.new([:user, :editor])
+    end
+    
     it "#roles << should add roles" do
       subject.roles << :admin
       subject.roles.should == Set.new([:admin])
@@ -115,7 +122,11 @@ describe SimpleRoles::Base do
       user.save!
       User.find_by_name!("stanislaw").should be_kind_of(User)
     end
-     
+    
+    pending "should not duplicate roles when adding" do
+    
+    end
+
     it "should all work" do
       admin_role = Role.find_by_name("admin")
       user = User.new(:name => "stanislaw")
