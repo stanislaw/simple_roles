@@ -7,9 +7,18 @@ end
 describe SimpleRoles::Base do
 
   context "Class Methods" do 
-  
     subject { User }
 
+    context "Scopes" do
+      before do
+      end
+      
+      SimpleRoles::Configuration.valid_roles.each do |vr|
+        it {should respond_to(:"#{vr}s")}
+        its(:"#{vr}s") { should be_kind_of(Array) }
+      end
+
+    end
     specify { should respond_to(:valid_roles) }
     its(:valid_roles) { should include(:user, :admin)}
   end

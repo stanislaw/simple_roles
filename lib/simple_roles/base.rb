@@ -1,16 +1,36 @@
 module SimpleRoles
   module Base
 
-    def self.included base
-      base.class_eval %{
-        has_many :user_roles
-        has_many :db_roles, :through => :user_roles, :class_name => 'Role', :source => :role
-      }
+    class << self
+      def included base
+        base.class_eval %{
+          has_many :user_roles
+          has_many :db_roles, :through => :user_roles, :class_name => 'Role', :source => :role
+        }
 
-      base.send :include, SimpleRoles::Base::InstanceMethods
+        base.send :include, SimpleRoles::Base::InstanceMethods
+        SimpleRoles::Configuration.user_models << base
+        base.register_roles_methods
+      end
     end
 
     module ClassMethods
+      def register_roles_methods
+        valid_roles.each do |role|
+          class_eval %{
+            def self.#{role}s
+              Role.find_by_name("#{role}").users
+            end
+          }
+
+          define_method :"#{role}?" do
+            roles.include?(:"#{role}")
+          end
+
+          alias_method :"is_#{role}?", :"#{role}?"
+        end
+      end
+
       def valid_roles
         SimpleRoles::Configuration.valid_roles
       end
@@ -48,15 +68,6 @@ module SimpleRoles
           return true if roles.include? role
         end
         false 
-      end
-
-      # TODO: remove duplication in SimpleRoles::Configuration:
-      SimpleRoles::Configuration.valid_roles.each do |role|
-        define_method :"#{role}?" do
-          roles.include?(:"#{role}")
-        end
-
-        alias_method :"is_#{role}?", :"#{role}?"
       end
 
       def add_roles *rolez
