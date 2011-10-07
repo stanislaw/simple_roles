@@ -9,7 +9,7 @@ require "simple_roles/macros"
 require_all File.expand_path("../../app", __FILE__)
 
 module SimpleRoles
-  autoload_modules :Base, :Configuration
+  autoload_modules :Base, :Configuration, :RolesArray
 
   class << self
     def configure &block
