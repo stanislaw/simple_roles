@@ -21,6 +21,10 @@ module SimpleRoles
             def self.#{role}s
               Role.find_by_name("#{role}").users
             end
+            
+            def self.#{role}s_ids
+              Role.find_by_name("#{role}").user_ids
+            end
           }
 
           define_method :"#{role}?" do

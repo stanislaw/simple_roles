@@ -15,6 +15,8 @@ describe SimpleRoles::Base do
       
       SimpleRoles::Configuration.valid_roles.each do |vr|
         it {should respond_to(:"#{vr}s")}
+        it {should respond_to(:"#{vr}s_ids")}
+
         its(:"#{vr}s") { should be_kind_of(Array) }
       end
 
