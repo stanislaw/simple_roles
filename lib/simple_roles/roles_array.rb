@@ -1,5 +1,5 @@
 module SimpleRoles
-  class RolesArray < Set
+  class RolesArray < Array
 
     attr_reader :base
 
@@ -41,7 +41,7 @@ module SimpleRoles
       self.roles = self.to_a + rolez
     end
 
-    #alias_method :add, :<<
+    alias_method :add, :<<
 
     def remove *rolez
       rolez.flatten!

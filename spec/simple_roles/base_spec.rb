@@ -81,23 +81,23 @@ describe SimpleRoles::Base do
 
     it "#roles= should set roles" do
       subject.roles = :admin
-      subject.roles.should == Set.new([:admin])
+      subject.roles.should == Array.new([:admin])
       subject.roles = :user
-      subject.roles.should == Set.new([:user])
+      subject.roles.should == Array.new([:user])
     end
 
     it "#roles= should set roles if array of strings passed (sh accept strings too!)" do
       subject.roles = 'admin'
-      subject.roles.should == Set.new([:admin])
+      subject.roles.should == Array.new([:admin])
       subject.roles = ['user', 'editor']
-      subject.roles.should == Set.new([:user, :editor])
+      subject.roles.should == Array.new([:user, :editor])
     end
     
     it "#roles << should add roles" do
       subject.roles << :admin
-      subject.roles.should == Set.new([:admin])
+      subject.roles.should == Array.new([:admin])
       subject.roles << :user
-      subject.roles.should == Set.new([:admin, :user])
+      subject.roles.should == Array.new([:admin, :user])
     end
 
     it "#remove_roles should remove roles" do
@@ -105,17 +105,25 @@ describe SimpleRoles::Base do
       subject.roles << :user
       subject.roles << :editor
 
-      subject.roles.should == Set.new([:admin, :user, :editor])
+      subject.roles.should == Array.new([:admin, :user, :editor])
  
       subject.remove_roles :admin
-      subject.roles.should == Set.new([:user, :editor])
+      subject.roles.should == Array.new([:user, :editor])
   
       subject.remove_roles :admin, :user, :editor
-      subject.roles.should == Set.new([])
+      subject.roles.should == Array.new([])
     end
   end
 
   context "Integration for roles methods" do
+    it "should work when #flatten is called over #roles" do
+      user = User.new(:name => "stanislaw")
+      user.roles << :admin
+      
+      user.roles_list.should == Array.new([:admin])
+      user.roles_list.flatten.should == Array.new([:admin])
+    end
+    
     it "should add :roles to accessible_attributes if they are Whitelisted" do
       user = User.new(:name => "stanislaw")
       user.roles << :admin
@@ -161,7 +169,7 @@ describe SimpleRoles::Base do
       user.save!
       user.roles.should be_empty
       user.roles = [:admin, :user]
-      user.roles.should == Set.new([:admin, :user])
+      user.roles.should == Array.new([:admin, :user])
       user.has_role?(:admin, :user).should be_true
       user.has_roles?([:admin, :user]).should be_true
       user.db_roles.size.should == 2
