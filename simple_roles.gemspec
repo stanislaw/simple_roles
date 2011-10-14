@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = %q{simple_roles}
-  s.version = "0.0.4"
+  s.version = "0.0.5"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = [%q{stanislaw}]
-  s.date = %q{2011-10-05}
+  s.date = %q{2011-10-14}
   s.description = %q{Simple Role System for Rails Apps}
   s.email = %q{s.pankevich@gmail.com}
   s.extra_rdoc_files = [
@@ -40,6 +40,7 @@ Gem::Specification.new do |s|
     "lib/simple_roles/configuration.rb",
     "lib/simple_roles/engine.rb",
     "lib/simple_roles/macros.rb",
+    "lib/simple_roles/roles_array.rb",
     "lib/simple_roles/version.rb",
     "lib/tasks/simple_roles_tasks.rake",
     "script/rails",
