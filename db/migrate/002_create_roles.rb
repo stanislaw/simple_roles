@@ -15,7 +15,9 @@ class CreateRoles < ActiveRecord::Migration
 
   def create_roles
     SimpleRoles::Configuration.valid_roles.each do |role|
-      Role.create(:name => role.to_s)
+      r = Role.new
+      r.name = role.to_s
+      r.save
     end
   end
 end
