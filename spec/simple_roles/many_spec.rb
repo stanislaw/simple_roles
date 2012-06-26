@@ -9,7 +9,7 @@ describe SimpleRoles::Many do
 
   before(:each) do
     setup_roles
-    SimpleRoles::Many.package User
+    SimpleRoles.package User, :many
   end
 
   context "Class Methods" do 
@@ -128,10 +128,6 @@ describe SimpleRoles::Many do
   end
 
   describe ".package" do
-    before(:all) do
-      SimpleRoles::Many.package User
-    end
-
     describe "Persistence" do
       it "should set roles" do
         user.roles = :admin

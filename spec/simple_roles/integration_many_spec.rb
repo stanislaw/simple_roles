@@ -7,8 +7,7 @@ end
 describe 'Integration for SimpleRoles::Many' do
   before do
     setup_roles
-
-    SimpleRoles::Many.package User
+    SimpleRoles::Packager.package User, :many
   end
 
   it "should all work" do
@@ -36,7 +35,6 @@ describe 'Integration for SimpleRoles::Many' do
     user.has_role?(:admin, :user).should be_true
     user.has_roles?([:admin, :user]).should be_true
     user.roles.size.should == 2
-    
     user.roles = [:admin]
     user.roles.should include(:admin)
     user.add_role :user

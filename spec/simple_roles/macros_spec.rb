@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe 'SimpleRoles Macros' do
-  
+
   context "Macros availability" do
     subject { Module }
     before { require 'simple_roles' }
@@ -22,7 +22,7 @@ describe 'SimpleRoles Macros' do
     specify { should be_kind_of(SimpleRoles::Macros) }
    
     context "Changes in User" do
-
+      # specify { should be_kind_of(SimpleRoles::Many::R
     end
     
     context "Changes in SimpleRoles::Configuration" do

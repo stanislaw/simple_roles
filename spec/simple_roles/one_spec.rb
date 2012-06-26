@@ -6,7 +6,7 @@ describe SimpleRoles::One do
   
   describe ".package" do
     before(:all) do
-      SimpleRoles::One.package OneUser
+      SimpleRoles::Packager.package OneUser, :one
     end
 
     describe "Persistence" do

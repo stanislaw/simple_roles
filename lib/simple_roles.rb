@@ -10,8 +10,7 @@ require "simple_roles/macros"
 require_all File.expand_path("../../app", __FILE__)
 
 module SimpleRoles
-  autoload_modules :One, :Many
-  autoload_modules :Base, :Configuration, :RolesArray
+  autoload_modules :Configuration, :Packager, :One, :Many
 
   extend self
 
@@ -22,7 +21,9 @@ module SimpleRoles
   def config
     SimpleRoles::Configuration
   end
-  delegate :strategy_class, :to => :config, :prefix => false
 
-  delegate :package, :to => :strategy_class, :prefix => false
+  def packager
+    SimpleRoles::Packager
+  end
+  delegate :package, :to => :packager, :prefix => false
 end

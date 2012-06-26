@@ -5,7 +5,6 @@ module SimpleRoles
         def included base
           base.class_eval %{
             extend SimpleRoles::Many::RolesMethods::DynamicMethods
-            include SimpleRoles::Many::RolesMethods::Methods
           }
         end
       end
@@ -42,45 +41,47 @@ module SimpleRoles
         end
       end
 
-      module Methods
-        def mass_assignment_authorizer *args
-          super.empty? ? super : (super + [:roles])
+      def roles_list
+        roles
+      end
+
+      def mass_assignment_authorizer *args
+        super.empty? ? super : (super + [:roles])
+      end
+
+      def has_roles? *rolez
+        rolez.flatten!
+
+        # rrr roles
+        rolez.all? do |role|
+          roles.include? role
         end
+      end
 
-        def has_roles? *rolez
-          rolez.flatten!
+      alias_method :has_role?, :has_roles?
 
-          # rrr roles
-          rolez.all? do |role|
-            roles.include? role
-          end
+      def has_any_role? *rolez
+        rolez.flatten!
+
+        rolez.any? do |role|
+          roles.include? role
         end
+      end
 
-        alias_method :has_role?, :has_roles?
+      def add_roles *rolez
+        self.roles = roles + rolez
+      end
 
-        def has_any_role? *rolez
-          rolez.flatten!
+      alias_method :add_role, :add_roles
 
-          rolez.any? do |role|
-            roles.include? role
-          end
-        end
+      def remove_roles *rolez
+        self.roles = roles - rolez
+      end
 
-        def add_roles *rolez
-          self.roles = roles + rolez
-        end
+      alias_method :remove_role, :remove_roles
 
-        alias_method :add_role, :add_roles
-
-        def remove_roles *rolez
-          self.roles = roles - rolez
-        end
-
-        alias_method :remove_role, :remove_roles
-
-        def set_role r
-          self.roles = r
-        end
+      def set_role r
+        self.roles = r
       end
     end
   end

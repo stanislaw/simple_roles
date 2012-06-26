@@ -36,18 +36,12 @@ module SimpleRoles
       @strategy ||= default_strategy
     end
 
-    private
-
     def available_strategies
       strategies.keys
     end
 
-    def default_strategy
-      :one
-    end
-
-    def strategy_class
-      strategies[strategy]
+    def strategy_class _strategy = nil
+      strategies[_strategy || strategy]
     end
 
     def strategies
@@ -55,6 +49,12 @@ module SimpleRoles
         :one => SimpleRoles::One,
         :many => SimpleRoles::Many
       }
+    end
+
+    private
+
+    def default_strategy
+      :one
     end
   end
 end
