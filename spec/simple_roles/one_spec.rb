@@ -2,11 +2,11 @@ require 'spec_helper'
 
 describe SimpleRoles::One do
   subject { SimpleRoles::One }
-  let(:user) { User.create :role => 'user' }
+  let(:user) { OneUser.create :role => 'user' }
   
   describe ".package" do
     before(:all) do
-      SimpleRoles::One.package User
+      SimpleRoles::One.package OneUser
     end
 
     describe "Persistence" do
@@ -43,7 +43,7 @@ describe SimpleRoles::One do
 
       describe "Dynamic scopes" do
         SimpleRoles.config.valid_roles.each do |r|
-          specify { User.should respond_to :"#{r}s" }
+          specify { OneUser.should respond_to :"#{r}s" }
         end
       end
 

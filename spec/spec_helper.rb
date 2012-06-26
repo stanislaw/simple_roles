@@ -9,7 +9,6 @@ require 'require_all'
 require 'cutter'
 require 'sugar-high/dsl'
 
-
 require 'active_record'
 
 require 'rspec/core'
@@ -17,6 +16,7 @@ require 'rspec/core'
 require 'factory_girl'
 
 require 'simple_roles'
+
 require_all File.expand_path('../support', __FILE__)
 
 path = File.dirname(__FILE__) + '/support/database.yml'
@@ -45,17 +45,19 @@ RSpec.configure do |config|
 
   config.before(:suite) do
     with ActiveRecord::Base.connection do
-      with ActiveRecord::Migrator do
-        # SimpleRoles's own migrations
-        migrate File.expand_path('../../db/migrate', __FILE__)
-        # Helper migration - users table
-        migrate File.expand_path('../support/migrations', __FILE__)
-      end if tables.empty?
+      # tables.each {|t| drop_table t }
 
-      (tables - ['schema_migrations']).map do |table|
-        table_count = execute("SELECT COUNT(*) FROM #{table}").first.first
-        execute "TRUNCATE #{table}" unless table_count == 0
-      end
+      # with ActiveRecord::Migrator do
+      #   # SimpleRoles's own migrations
+      #   migrate File.expand_path('../../db/migrate', __FILE__)
+      #   # Helper migration - users table
+      #   migrate File.expand_path('../support/migrations', __FILE__)
+      # end if tables.empty?
+
+      # (tables - ['schema_migrations']).map do |table|
+      #   table_count = execute("SELECT COUNT(*) FROM #{table}").first.first
+      #   execute "TRUNCATE #{table}" unless table_count == 0
+      # end
     end
   end
 

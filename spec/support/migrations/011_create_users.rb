@@ -1,10 +1,8 @@
 class CreateUsers < ActiveRecord::Migration
   def up
     create_table(:users) do |t|
-      t.string  :name
-      t.string  :username
-
-      t.string :role
+      t.string :name
+      t.string :username
 
       t.timestamps
     end
