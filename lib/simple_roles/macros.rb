@@ -1,7 +1,7 @@
 module SimpleRoles
   module Macros
     def simple_roles &block
-      SimpleRoles.config.instance_eval(&block) if block
+      SimpleRoles.config.instance_exec(SimpleRoles.config, &block) if block
       SimpleRoles.package self
     end
   end

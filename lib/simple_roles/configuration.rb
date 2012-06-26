@@ -8,8 +8,12 @@ module SimpleRoles
       @user_models ||= []
     end
 
-    def valid_roles
-      @valid_roles || default_roles
+    def valid_roles *vr
+      if vr.any?
+        self.valid_roles = vr.flatten
+      end
+
+      @valid_roles ||= default_roles
     end
 
     def valid_roles= vr
@@ -24,16 +28,18 @@ module SimpleRoles
       [:user, :admin]
     end
 
-    def distribute_methods
-      user_models.each(&:register_dynamic_methods)
-    end
-
     def strategy st = nil
       if st
-        @strategy = st
+        self.strategy = st
       end
 
       @strategy ||= default_strategy
+    end
+
+    def strategy= st
+      check_strategy st
+
+      @strategy = st
     end
 
     def available_strategies
@@ -52,6 +58,14 @@ module SimpleRoles
     end
 
     private
+
+    def distribute_methods
+      user_models.each(&:register_dynamic_methods)
+    end
+
+    def check_strategy strategy
+      raise "Wrong strategy!" unless available_strategies.include? strategy
+    end
 
     def check_roles rolez = valid_roles
       raise "There should be an array of valid roles" unless rolez.kind_of?(Array)

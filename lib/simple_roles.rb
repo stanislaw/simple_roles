@@ -15,7 +15,7 @@ module SimpleRoles
   extend self
 
   def configure &block
-    yield config
+    config.instance_exec config, &block
   end
 
   def config
@@ -25,5 +25,6 @@ module SimpleRoles
   def packager
     SimpleRoles::Packager
   end
+  
   delegate :package, :to => :packager, :prefix => false
 end
