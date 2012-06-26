@@ -2,9 +2,15 @@
 
 ### Added
 
+* Added strategies: "One" - the simplest strategy possible and "Many" - the former only strategy from older versions.
+
 ### Changed
 
-### Fixed
+* SimpleRoles.configure - much better DSL
+
+### Removed
+
+* Removed RolesArray presenter in "Many" strategy
 
 # Versions <= 0.0.5 
 

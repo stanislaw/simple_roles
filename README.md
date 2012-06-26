@@ -29,8 +29,12 @@ Create file simple_roles.rb in config/initializers and write there:
 # config/initializers/simple_roles.rb
 SimpleRoles.configure do |config|
   config.valid_roles = [:user, :admin, :editor]
+  config.strategy = :many # Default is :one
 end
 ```
+
+### Choosing Strategy
+...
 
 ### Copy and migrate SimpleRoles migrations by following rake task:
 
@@ -52,30 +56,28 @@ end
 ## Usage
 
 ```ruby
-user.roles => #<RolesArray: {}>
+user.roles # => []
 
 user.roles = :admin
-user.roles # => #<RolesArray: {:admin}>
-user.roles_list # => #<RolesArray: {:admin}>
+user.roles # => [:admin]
+user.roles_list # => [:admin]
 user.admin? # => true
 user.is_admin? # => true
 
-user.roles << :user
-user.roles # => #<RolesArray: {:admin, :user}>
+user.roles = [:admin, :user]
+user.roles # => [:admin, :user]
 user.is_user? # => true
 
 user.add_role :editor
-user.roles # => #<RolesArray: #{:admin, :user, :editor}>
+user.roles # => [:admin, :user, :editor]
 
 user.remove_role :user
-user.roles # => #<RolesArray: {:admin, :editor}>
+user.roles # => [:admin, :editor]
 user.has_role?(:admin) # => true
 user.has_any_role?(:admin, :blip) # => true
 user.has_role?(:blogger) # => false
 ```
 
-## Todo:
+## Copyright
 
-- Write role groups part
-- Provide some more config options
-- More and better tests
+Copyright (c) 2012 Stanislaw Pankevich.
