@@ -3,7 +3,7 @@ development:
   host: localhost
   database: simple_roles_development
   username: root 
-  password: root
+  password:
   encoding: utf8
 
 test:
@@ -11,16 +11,5 @@ test:
   host: localhost
   database: simple_roles_test
   username: root
-  password: root
+  password:
   encoding: utf8
-
-production:
-  adapter: mysql2
-  host: localhost
-  port: 5432
-  database: simple_roles_production
-  username: pgsql 
-  password: pgsql 
-  schema_search_path: public
-  encoding: utf8
-  template: template0

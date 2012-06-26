@@ -2,22 +2,22 @@ module SimpleRoles
   module Configuration
     extend self
     
-    attr_accessor :valid_roles, :user_models
-    attr_writer :strategy
+    attr_writer :strategy, :user_models
 
     def user_models
       @user_models ||= []
     end
 
-    def valid_roles= vr
-      raise "There should be an array of valid roles" if !vr.kind_of?(Array)
-      @valid_roles = vr
-      
-      distribute_methods
-    end
-
     def valid_roles
       @valid_roles || default_roles
+    end
+
+    def valid_roles= vr
+      check_roles(vr)
+
+      @valid_roles = vr
+
+      distribute_methods
     end
 
     def default_roles
@@ -53,6 +53,18 @@ module SimpleRoles
 
     private
 
+    def check_roles rolez = valid_roles
+      raise "There should be an array of valid roles" unless rolez.kind_of?(Array)
+
+      rolez.map do |rolle|
+        begin
+          Role.find_by_name! rolle.to_s
+        rescue
+          puts "SimpleRoles warning: Couldn't find Role for #{rolle}. Maybe you need to re-run migrations?"
+        end
+      end if strategy == :many
+    end
+    
     def default_strategy
       :one
     end

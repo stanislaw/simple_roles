@@ -17,4 +17,16 @@ describe SimpleRoles::Configuration do
       subject.strategy.should == :many
     end
   end
+
+  describe ".valid_roles" do
+    it "should set valid roles" do
+      valid_roles_before = SimpleRoles::Configuration.valid_roles
+
+      SimpleRoles::Configuration.valid_roles = [:user]
+      SimpleRoles::Configuration.valid_roles.should == [:user]
+
+      SimpleRoles::Configuration.valid_roles = valid_roles_before
+      SimpleRoles::Configuration.valid_roles.should == valid_roles_before
+    end
+  end
 end

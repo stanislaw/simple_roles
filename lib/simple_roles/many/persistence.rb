@@ -17,19 +17,27 @@ module SimpleRoles
       def roles= *rolez
         rolez.to_symbols!.flatten!
 
-        raise "Not a valid role!" if (rolez - SimpleRoles::Configuration.valid_roles).size > 0
+        super retrieve_roles(rolez)
 
-        rolez = rolez.map do |rolle|
+        save!
+      end
+
+      private
+
+      def retrieve_roles rolez
+        raise "Not a valid role!" if (rolez - config.valid_roles).size > 0
+
+        rolez.map do |rolle|
           begin
             Role.find_by_name! rolle.to_s
           rescue
             raise "Couldn't find Role for #{rolle}. Maybe you need to re-run migrations?"
           end
         end
+      end
 
-        super rolez
-
-        save!
+      def config
+        SimpleRoles::Configuration
       end
     end
   end
