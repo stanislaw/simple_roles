@@ -5,7 +5,7 @@ SimpleRoles.configure do |config|
 end
 
 describe SimpleRoles::Many do
-  let(:user) { User.create :role => 'user' }
+  let(:user) { User.create }
 
   before(:each) do
     setup_roles
@@ -42,22 +42,25 @@ describe SimpleRoles::Many do
     end
 
     it "#has_role?, #has_roles?" do
-      subject.roles << :admin
+      subject.roles = [:admin]
+      
       subject.has_role?(:admin).should be_true
       subject.has_role?(:admin, :user).should be_false
       subject.has_roles?(:editor).should be_false
-      subject.roles << :user
+      
+      subject.roles = [ :admin, :user ]
+
       subject.has_role?(:admin, :user).should be_true
       subject.has_role?([:admin, :user]).should be_true
     end
 
     it "#admin?, #user?, #editor? ..." do
-      subject.roles << :admin
+      subject.roles = [ :admin ]
       subject.admin?.should be_true
       subject.is_admin?.should be_true
       subject.user?.should be_false
       subject.editor?.should be_false
-      subject.roles << :editor
+      subject.roles = [ :editor ]
       subject.editor?.should be_true
     end
   end
@@ -81,17 +84,8 @@ describe SimpleRoles::Many do
       subject.roles.should == Array.new([:user, :editor])
     end
     
-    it "#roles << should add roles" do
-      subject.roles << :admin
-      subject.roles.should == Array.new([:admin])
-      subject.roles << :user
-      subject.roles.should == Array.new([:admin, :user])
-    end
-
     it "#remove_roles should remove roles" do
-      subject.roles << :admin
-      subject.roles << :user
-      subject.roles << :editor
+      subject.roles = [ :admin, :user, :editor ]
 
       subject.roles.should == Array.new([:admin, :user, :editor])
  
@@ -106,7 +100,7 @@ describe SimpleRoles::Many do
   context "Integration for roles methods" do
     it "should work when #flatten is called over #roles" do
       user = User.new(:name => "stanislaw")
-      user.roles << :admin
+      user.roles = [ :admin ]
       
       user.roles_list.should == Array.new([:admin])
       user.roles_list.flatten.should == Array.new([:admin])
@@ -114,7 +108,7 @@ describe SimpleRoles::Many do
     
     it "should add :roles to accessible_attributes if they are Whitelisted" do
       user = User.new(:name => "stanislaw")
-      user.roles << :admin
+      user.roles = [ :admin ]
 
       user.roles_list.should include(:admin)
       user.save!
@@ -124,7 +118,7 @@ describe SimpleRoles::Many do
       User.attr_accessible :name
         
       user = User.new(:name => "stanislaw")
-      user.roles << :admin
+      user.roles = [ :admin ]
       user.roles_list.should include(:admin)
       user.save!
       User.find_by_name!("stanislaw").should be_kind_of(User)

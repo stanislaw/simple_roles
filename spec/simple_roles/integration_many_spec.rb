@@ -16,8 +16,7 @@ describe 'Integration for SimpleRoles::Many' do
     user = User.new(:name => "stanislaw")
     user.roles_list.should be_empty
     user.has_any_role?(:admin).should be_false
-    user.roles << :admin
-    user.db_roles.should include(admin_role)
+    user.roles = [ :admin ]
     user.roles_list.should include(:admin)
     user.roles.should include(:admin)
     user.has_role?(:admin).should be_true
@@ -25,11 +24,10 @@ describe 'Integration for SimpleRoles::Many' do
     user.is_admin?.should be_true
     user.has_roles?(:admin).should be_true
     user.save!
-    user.db_roles.should include(admin_role)
     user.roles.should include(:admin)
     user = User.find_by_name! "stanislaw"
     user.roles.should include(:admin)
-    user.roles.remove(:admin)
+    user.remove_role(:admin)
     user.roles.should be_empty
     user.save!
     user.roles.should be_empty
@@ -37,12 +35,9 @@ describe 'Integration for SimpleRoles::Many' do
     user.roles.should == Array.new([:admin, :user])
     user.has_role?(:admin, :user).should be_true
     user.has_roles?([:admin, :user]).should be_true
-    user.db_roles.size.should == 2
-    user.roles.clear!
-    user.db_roles.should be_empty
-    user.roles.should be_empty
-    user.roles << :admin
-    user.db_roles.should include(admin_role)
+    user.roles.size.should == 2
+    
+    user.roles = [:admin]
     user.roles.should include(:admin)
     user.add_role :user
     user.roles.should include(:user, :admin)

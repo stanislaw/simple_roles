@@ -8,7 +8,9 @@ module SimpleRoles
       SimpleRoles::Configuration.user_models << clazz
 
       clazz.send :include, SimpleRoles::Many::Persistence
+
       clazz.send :include, SimpleRoles::Many::RolesMethods
+      clazz.new.roles << :user
     end
   end
 end

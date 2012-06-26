@@ -3,8 +3,10 @@ module SimpleRoles
     module RolesMethods
       class << self
         def included base
-          SimpleRoles::Configuration.user_models << base
-          base.send :extend, SimpleRoles::Many::RolesMethods::DynamicMethods
+          base.class_eval %{
+            extend SimpleRoles::Many::RolesMethods::DynamicMethods
+            include SimpleRoles::Many::RolesMethods::Methods
+          }
         end
       end
 
@@ -40,58 +42,45 @@ module SimpleRoles
         end
       end
 
-      def mass_assignment_authorizer *args
-        super.empty? ? super : (super + [:roles])
-      end
-
-      def roles
-        roles_array 
-      end
-
-      alias_method :roles_list, :roles
-
-      def has_roles? *rolez
-        rolez.flatten!
-
-        rolez.all? do |role|
-          roles.include? role
+      module Methods
+        def mass_assignment_authorizer *args
+          super.empty? ? super : (super + [:roles])
         end
-      end
 
-      alias_method :has_role?, :has_roles?
+        def has_roles? *rolez
+          rolez.flatten!
 
-      def has_any_role? *rolez
-        rolez.flatten!
-
-        rolez.any? do |role|
-          roles.include? role
+          # rrr roles
+          rolez.all? do |role|
+            roles.include? role
+          end
         end
-      end
 
-      def add_roles *rolez
-        roles_array.add *rolez
-      end
+        alias_method :has_role?, :has_roles?
 
-      alias_method :add_role, :add_roles
+        def has_any_role? *rolez
+          rolez.flatten!
 
-      def remove_roles *rolez
-        roles_array.remove *rolez
-      end
+          rolez.any? do |role|
+            roles.include? role
+          end
+        end
 
-      alias_method :remove_role, :remove_roles
+        def add_roles *rolez
+          self.roles = roles + rolez
+        end
 
-      def set_role r
-        self.roles = r
-      end
+        alias_method :add_role, :add_roles
 
-      def roles= *rolez
-        roles_array.roles = *rolez
-      end
+        def remove_roles *rolez
+          self.roles = roles - rolez
+        end
 
-      private
+        alias_method :remove_role, :remove_roles
 
-      def roles_array
-        @roles_array ||= SimpleRoles::Many::RolesArray.new self
+        def set_role r
+          self.roles = r
+        end
       end
     end
   end
