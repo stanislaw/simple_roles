@@ -25,7 +25,7 @@ module SimpleRoles
     end
 
     def distribute_methods
-      user_models.each(&:register_roles_methods)
+      user_models.each(&:register_dynamic_methods)
     end
 
     def strategy st = nil

@@ -17,11 +17,11 @@ module SimpleRoles
       module DynamicMethods
         class << self
           def extended base
-            base.register_roles_methods
+            base.register_dynamic_methods
           end
         end
 
-        def register_roles_methods
+        def register_dynamic_methods
           SimpleRoles.config.valid_roles.each do |r|
             scope :"#{r}s", where(:role => r.to_s)
             

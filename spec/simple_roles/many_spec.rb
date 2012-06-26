@@ -15,15 +15,6 @@ describe SimpleRoles::Many do
   context "Class Methods" do 
     subject { User }
 
-    context "Scopes" do
-      SimpleRoles::Configuration.valid_roles.each do |vr|
-        it {should respond_to(:"#{vr}s")}
-        it {should respond_to(:"#{vr}s_ids")}
-
-        its(:"#{vr}s") { should be_kind_of(Array) }
-      end
-
-    end
     specify { should respond_to(:valid_roles) }
     its(:valid_roles) { should include(:user, :admin)}
   end
@@ -169,8 +160,12 @@ describe SimpleRoles::Many do
       end
 
       describe "Dynamic scopes" do
+        subject { User }
         SimpleRoles.config.valid_roles.each do |r|
-          specify { User.should respond_to :"#{r}s" }
+          it { should respond_to :"#{r}s" }
+          it { should respond_to(:"#{r}s_ids") }
+
+          its(:"#{r}s") { should be_kind_of(Array) }
         end
       end
 
