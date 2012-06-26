@@ -1,8 +1,8 @@
 module SimpleRoles
   module Macros
     def simple_roles &block
-      yield SimpleRoles.config if block
-      include SimpleRoles::Base
+      SimpleRoles.config.instance_eval(&block) if block
+      SimpleRoles.package self
     end
   end
 end

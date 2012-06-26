@@ -1,10 +1,9 @@
-require 'singleton'
 module SimpleRoles
   module Configuration
-
     extend self
     
     attr_accessor :valid_roles, :user_models
+    attr_writer :strategy
 
     def user_models
       @user_models ||= []
@@ -26,9 +25,36 @@ module SimpleRoles
     end
 
     def distribute_methods
-      user_models.each do |um|
-        um.register_roles_methods
+      user_models.each(&:register_roles_methods)
+    end
+
+    def strategy st = nil
+      if st
+        @strategy = st
       end
+
+      @strategy ||= default_strategy
+    end
+
+    private
+
+    def available_strategies
+      strategies.keys
+    end
+
+    def default_strategy
+      :one
+    end
+
+    def strategy_class
+      strategies[strategy]
+    end
+
+    def strategies
+      {
+        :one => SimpleRoles::One,
+        :many => SimpleRoles::Many
+      }
     end
   end
 end

@@ -1,25 +1,35 @@
 require 'spec_helper'
 
-describe SimpleRoles::Base do
+describe 'SimpleRoles Macros' do
   
   context "Macros availability" do
     subject { Module }
-    before {
-      require 'simple_roles'
-    }
-
+    before { require 'simple_roles' }
     specify { should be_kind_of(SimpleRoles::Macros) }
   end
 
-  context "after applying macros" do
+  context "When Macros is being applied" do
     subject { User }
+
     before do
       class User < ActiveRecord::Base
-        simple_roles
+        simple_roles do
+          strategy :many
+        end
       end
     end
 
-    specify { should be_kind_of(SimpleRoles::Macros) }    
+    specify { should be_kind_of(SimpleRoles::Macros) }
+   
+    context "Changes in User" do
+
+    end
+    
+    context "Changes in SimpleRoles::Configuration" do
+      it "should set strategy" do
+        SimpleRoles::Configuration.strategy.should == :many
+      end
+    end
   end
 
 end

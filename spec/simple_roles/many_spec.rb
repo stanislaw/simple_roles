@@ -4,19 +4,19 @@ SimpleRoles.configure do |config|
   config.valid_roles = [:user, :admin, :editor]
 end
 
-describe SimpleRoles::Base do
+
+describe SimpleRoles::Many do
+  let(:user) { User.create :role => 'user' }
 
   before(:each) do
     setup_roles
+    SimpleRoles::Many.package User
   end
 
   context "Class Methods" do 
     subject { User }
 
     context "Scopes" do
-      before do
-      end
-      
       SimpleRoles::Configuration.valid_roles.each do |vr|
         it {should respond_to(:"#{vr}s")}
         it {should respond_to(:"#{vr}s_ids")}
@@ -146,9 +146,7 @@ describe SimpleRoles::Base do
       User.find_by_name!("stanislaw").should be_kind_of(User)
     end
     
-    pending "should not duplicate roles when adding" do
-    
-    end
+    pending "should not duplicate roles when adding" do;end
 
     it "should all work" do
       admin_role = Role.find_by_name("admin")
@@ -191,5 +189,63 @@ describe SimpleRoles::Base do
       user.has_any_role?(:blip).should be_false
     end
   end
+  describe ".package" do
+    before(:all) do
+      SimpleRoles::Many.package User
+    end
 
+    describe "Persistence" do
+      it "should set roles" do
+        user.roles = :admin
+        user.roles.should == [:admin]
+      end
+    end
+
+    describe "Roles methods" do
+      describe "#set_role" do
+        it "should set role" do
+          user.set_role(:admin)
+          user.roles.should == [:admin]
+        end
+
+        it "should persist role" do
+          user.set_role(:admin)
+          user.reload
+          user.roles.should == [:admin]
+        end
+      end
+
+      describe "Dynamic scopes" do
+        SimpleRoles.config.valid_roles.each do |r|
+          specify { User.should respond_to :"#{r}s" }
+        end
+      end
+
+      describe "Dynamic methods" do
+        SimpleRoles.config.valid_roles.each do |r|
+          specify { user.should respond_to :"#{r}?" }
+        end
+
+        describe "#user?, #admin?, ..." do
+          specify do
+            user.set_role(:admin)
+            user.admin?.should == true
+
+            user.set_role(:user)
+            user.user?.should == true
+          end
+        end
+        
+        describe "#is_user?, #is_admin?, ..." do
+          specify do
+            user.set_role(:admin)
+            user.is_admin?.should == true
+
+            user.set_role(:user)
+            user.is_user?.should == true
+          end
+        end
+      end
+    end
+  end
 end

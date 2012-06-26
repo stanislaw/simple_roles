@@ -1,5 +1,5 @@
 module SimpleRoles
-  class RolesArray < Array
+  class RolesPresenter < Array
 
     attr_reader :base
 
@@ -52,12 +52,6 @@ module SimpleRoles
       real_roles_db.clear
       base.save!
       clear
-    end
-
-    private
-
-    def clear
-      super
     end
   end
 end
