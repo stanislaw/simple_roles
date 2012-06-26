@@ -5,7 +5,7 @@ SimpleRoles.configure do |config|
 end
 
 describe SimpleRoles::Many do
-  let(:user) { User.create }
+  let(:user) { create :user }
 
   before(:each) do
     setup_roles
@@ -20,25 +20,17 @@ describe SimpleRoles::Many do
   end
 
   context "Instance methods" do
-    subject {User.new}
+    subject { User.new }
    
     [:roles, :roles_list].each do |meth|
       specify { should respond_to(meth) }
       its(:"#{meth}") { should be_empty }
     end
-
-    context "#roles" do
-      it "call on #roles.clear should raise error" do
-        lambda { 
-          roles.clear
-        }.should raise_error
-      end
-    end
   end
 
   context "Read API" do
     subject do
-      @user ||= User.create(:name => "stanislaw")
+      user
     end
 
     it "#has_role?, #has_roles?" do
@@ -67,7 +59,7 @@ describe SimpleRoles::Many do
   
   context "Write API" do
     subject do
-      @user ||= User.new(:name => "stanislaw")
+      user
     end
 
     it "#roles= should set roles" do
@@ -99,7 +91,6 @@ describe SimpleRoles::Many do
 
   context "Integration for roles methods" do
     it "should work when #flatten is called over #roles" do
-      user = User.new(:name => "stanislaw")
       user.roles = [ :admin ]
       
       user.roles_list.should == Array.new([:admin])
@@ -107,7 +98,6 @@ describe SimpleRoles::Many do
     end
     
     it "should add :roles to accessible_attributes if they are Whitelisted" do
-      user = User.new(:name => "stanislaw")
       user.roles = [ :admin ]
 
       user.roles_list.should include(:admin)
@@ -124,7 +114,14 @@ describe SimpleRoles::Many do
       User.find_by_name!("stanislaw").should be_kind_of(User)
     end
     
-    pending "should not duplicate roles when adding" do;end
+    it "should not duplicate roles when adding" do
+      user.roles = [ :admin ]
+      user.roles.should == [ :admin ]
+
+      user.add_role :admin
+
+      user.roles.should == [ :admin ]
+    end
   end
 
   describe ".package" do

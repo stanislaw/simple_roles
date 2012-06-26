@@ -5,11 +5,13 @@ describe 'SimpleRoles Macros' do
   context "Macros availability" do
     subject { Module }
     before { require 'simple_roles' }
-    specify { should be_kind_of(SimpleRoles::Macros) }
+    specify { should be_kind_of SimpleRoles::Macros }
   end
 
-  context "When Macros is being applied" do
+  context "When Macros is applied" do
     subject { User }
+
+    specify { should be_kind_of SimpleRoles::Macros }
 
     before do
       class User < ActiveRecord::Base
@@ -19,12 +21,15 @@ describe 'SimpleRoles Macros' do
       end
     end
 
-    specify { should be_kind_of(SimpleRoles::Macros) }
-   
     context "Changes in User" do
-      # specify { should be_kind_of(SimpleRoles::Many::R
+      specify { should include SimpleRoles::Many::RolesMethods }
+      specify { should include SimpleRoles::Many::RolesMethods }
+
+      [:roles, :roles_list, :add_role, :roles=, :remove_role].each do |meth|
+        specify { subject.new.should respond_to meth }
+      end
     end
-    
+
     context "Changes in SimpleRoles::Configuration" do
       it "should set strategy" do
         SimpleRoles::Configuration.strategy.should == :many

@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe SimpleRoles::One do
   subject { SimpleRoles::One }
-  let(:user) { OneUser.create :role => 'user' }
+  let(:user) { create :one_user, :role => 'user' }
   
   describe ".package" do
     before(:all) do
