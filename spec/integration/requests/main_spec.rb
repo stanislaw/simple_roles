@@ -1,11 +1,11 @@
-require 'dummy_spec_helper'
+require 'spec_helper'
 
 describe "Requests" do
-  it "truth" do
+  pending "truth" do
     Rails.application.should be_kind_of(Dummy::Application)
   end
 
-  describe "Basic pages" do
+  pending "Basic pages" do
     before do
       login_as(User.first) 
     end
@@ -16,6 +16,5 @@ describe "Requests" do
       get '/'
       response.status.should be(200)
     end
-
   end
 end

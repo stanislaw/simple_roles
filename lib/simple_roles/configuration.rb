@@ -13,6 +13,7 @@ module SimpleRoles
     def valid_roles= vr
       raise "There should be an array of valid roles" if !vr.kind_of?(Array)
       @valid_roles = vr
+      
       distribute_methods
     end
 

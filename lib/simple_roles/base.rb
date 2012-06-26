@@ -9,6 +9,7 @@ module SimpleRoles
         }
 
         base.send :include, SimpleRoles::Base::InstanceMethods
+
         SimpleRoles::Configuration.user_models << base
         base.register_roles_methods
       end
@@ -90,22 +91,12 @@ module SimpleRoles
         roles_array.roles = *rolez
       end
 
-      # TODO: implement
-      #
-      def role_groups_list
-        []
-      end
-
       private
 
       def roles_array
         @roles_array ||= SimpleRoles::RolesArray.new self
       end
-
     end
 
   end
 end
-
-
-

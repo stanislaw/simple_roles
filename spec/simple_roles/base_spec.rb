@@ -33,7 +33,7 @@ describe SimpleRoles::Base do
       its(:"#{meth}") { should be_empty }
     end
 
-    [:roles, :roles_list, :role_groups_list].each do |meth|
+    [:roles, :roles_list].each do |meth|
       specify { should respond_to(meth) }
       its(:"#{meth}") { should be_empty }
     end
