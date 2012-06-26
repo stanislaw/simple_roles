@@ -6,6 +6,10 @@ end
 
 describe SimpleRoles::Base do
 
+  before(:each) do
+    setup_roles
+  end
+
   context "Class Methods" do 
     subject { User }
 

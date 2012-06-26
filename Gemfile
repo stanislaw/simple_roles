@@ -7,16 +7,14 @@ source "http://rubygems.org"
 gem 'require_all'
 gem 'sugar-high'
 gem 'sweetloader'
+gem 'activerecord'
 
 group :development, :test do
-  gem 'activerecord'
   gem 'rake-kit'
   gem 'devise'
   gem 'mysql2'
   gem 'jeweler'
   gem 'cutter'
-  gem 'rails'
-  gem 'rspec-rails'
-  gem 'capybara'
+  gem 'rspec'
   gem 'factory_girl'
 end

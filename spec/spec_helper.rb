@@ -4,18 +4,19 @@ require 'rubygems'
 ENV["RAILS_ENV"] ||= 'test'
 
 #require File.expand_path("../dummy/config/environment", __FILE__)
+require 'logger'
 require 'require_all'
 require 'cutter'
 require 'sugar-high/dsl'
 
+
 require 'active_record'
 
-require 'simple_roles'
-
 require 'rspec/core'
-#require 'shoulda'
+
 require 'factory_girl'
 
+require 'simple_roles'
 require_all File.expand_path('../support', __FILE__)
 
 path = File.dirname(__FILE__) + '/support/database.yml'
@@ -35,11 +36,11 @@ end
 
 ActiveRecord::Base.shared_connection = ActiveRecord::Base.connection
 
-#ActiveRecord::Base.logger = Logger.new(STDERR)
+# ActiveRecord::Base.logger = Logger.new(STDERR)
 
 RSpec.configure do |config|
   config.mock_with :rspec
-  
+
   config.include FactoryGirl::Syntax::Methods
 
   config.before(:suite) do
@@ -50,6 +51,19 @@ RSpec.configure do |config|
         # Helper migration - users table
         migrate File.expand_path('../support/migrations', __FILE__)
       end if tables.empty?
+
+      (tables - ['schema_migrations']).map do |table|
+        table_count = execute("SELECT COUNT(*) FROM #{table}").first.first
+        execute "TRUNCATE #{table}" unless table_count == 0
+      end
     end
+  end
+
+  config.before(:each) do
+    Transaction.start
+  end
+
+  config.after(:each) do
+    Transaction.clean
   end
 end

@@ -12,7 +12,6 @@ class CreateRoles < ActiveRecord::Migration
     drop_table :roles
   end
 
-
   def create_roles
     SimpleRoles::Configuration.valid_roles.each do |role|
       Role.create(:name => role.to_s)
