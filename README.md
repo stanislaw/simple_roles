@@ -99,16 +99,16 @@ class Role < ActiveRecord::Base
 end
 ```
 
-**You don't need to write them by hands** - all these classes SimpleRoles configures **automatically**. 
+**You don't need to create these classes (UserRoles, Roles) and write these associations by hands** - all these classes SimpleRoles configures **automatically**. The only class you need is User and you must have *simple_roles* in it (see below).
 
-But you need to supply migrations for them - copy and migrate SimpleRoles migrations by following rake task:
+**But you need** to supply migrations for them - copy and migrate SimpleRoles migrations by following rake task:
 
 ```ruby
 rake simple_roles_engine:install:migrations
 rake db:migrate
 ```
 
-Note! Migrations are based on roles you are to set up as valid (see previous step). If you do not create initializer with valid_roles, then valid_roles will be set up to defaults: :user and :admin.
+**Note!** Migrations are based on roles you are to set up as valid (see previous step). If you do not create initializer with valid_roles, then valid_roles will be set up to defaults: :user and :admin.
 
 And finally include 'simple_roles' macros in your User model:
 
