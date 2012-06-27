@@ -5,7 +5,7 @@
 
 Gem::Specification.new do |s|
   s.name = "simple_roles"
-  s.version = "0.0.6"
+  s.version = "0.0.7"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["stanislaw"]
@@ -134,6 +134,7 @@ Gem::Specification.new do |s|
     "spec/integration/requests/main_spec.rb",
     "spec/simple_roles/configuration_spec.rb",
     "spec/simple_roles/integration_many_spec.rb",
+    "spec/simple_roles/integration_one_spec.rb",
     "spec/simple_roles/macros_spec.rb",
     "spec/simple_roles/many/persistence_spec.rb",
     "spec/simple_roles/many_spec.rb",
