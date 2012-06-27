@@ -47,12 +47,12 @@ RSpec.configure do |config|
     with ActiveRecord::Base.connection do
       # tables.each {|t| drop_table t }
 
-      # with ActiveRecord::Migrator do
-      #   # SimpleRoles's own migrations
-      #   migrate File.expand_path('../../db/migrate', __FILE__)
-      #   # Helper migration - users table
-      #   migrate File.expand_path('../support/migrations', __FILE__)
-      # end if tables.empty?
+      with ActiveRecord::Migrator do
+        # SimpleRoles's own migrations
+        migrate File.expand_path('../../db/migrate', __FILE__)
+        # Helper migration - users table
+        migrate File.expand_path('../support/migrations', __FILE__)
+      end if tables.empty?
 
       # (tables - ['schema_migrations']).map do |table|
       #   table_count = execute("SELECT COUNT(*) FROM #{table}").first.first

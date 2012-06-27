@@ -1,4 +1,4 @@
 SimpleRoles.configure do |config|
-  strategy :many
+  strategy :one
   valid_roles :user, :admin, :editor
 end

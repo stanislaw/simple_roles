@@ -13,6 +13,7 @@ module SimpleRoles
         self.role= r
         save!
       end
+      alias_method :update_role, :set_role
 
       module DynamicMethods
         class << self

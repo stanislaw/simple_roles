@@ -1,10 +1,10 @@
 # SimpleRoles
 
-SimpleRoles is a Rails Engine providing simple Role System for any Rails 3 app. It was created as demo role-system to accompany [CanTango gem](https://github.com/kristianmandrup/cantango) initial installiation and usage. Intended to be very easy to setup & use.
+SimpleRoles is a Rails Engine providing simple Role System for any Rails 3 app. 
 
-It even seems to be good for being used as a real role system inspite of (or due to ;)) its almost maximum simplicity.
+Initially, it was created as demo role-system to accompany [CanTango gem](https://github.com/kristianmandrup/cantango) initial installiation and usage, and intended to be very easy to setup & use.
 
-If you are looking for a real serious roles system solution try [Troles](https://github.com/kristianmandrup/troles) gem created by [Kristian Mandrup](https://github.com/kristianmandrup)
+Now it is good to be used as a real role system inspite of or due to its almost maximum simplicity.
 
 ## Installiation
 
@@ -132,6 +132,34 @@ end
 ```
 
 ## Usage example
+
+### One
+
+```ruby
+user = User.create
+
+user.role # => nil
+
+user.role = :admin
+user.role # => :admin
+user.admin? # => true
+user.is_admin? # => true
+
+# Accepts strings too 
+user.role = 'instructor'
+user.role # => :instructor
+
+# #set_role and #update_role are persistent - #save is called also
+user.set_role(:editor)
+user.reload
+user.role # => :editor
+
+user.update_role(:user)
+user.reload
+user.role # => :user
+```
+
+### Many
 
 ```ruby
 user = User.new
