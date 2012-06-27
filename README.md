@@ -6,6 +6,8 @@ Initially, it was created as demo role-system to accompany [CanTango gem](https:
 
 Now it is good to be used as a real role system inspite of or due to its almost maximum simplicity.
 
+[![Build Status](https://secure.travis-ci.org/stanislaw/simple_roles.png)](http://travis-ci.org/stanislaw/simple_roles)
+
 ## Installiation
 
 ### Prerequisites
