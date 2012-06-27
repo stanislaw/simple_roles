@@ -186,6 +186,18 @@ user.has_any_role?(:admin, :blip) # => true
 user.has_role?(:blogger) # => false
 ```
 
+### Both strategies
+
+For each of valid role both strategies automatically define scope methods in User models:
+
+```ruby
+SimpleRoles.config.valid_roles # => [:user, :admin, :editor]
+
+User.users # => []
+User.admins # => []
+User.editors # => []
+```
+
 ## Copyright
 
 Copyright (c) 2012 Stanislaw Pankevich.
