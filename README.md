@@ -10,7 +10,7 @@ If you are looking for a real serious roles system solution try [Troles](https:/
 
 ### Prerequisites
 
-SimpleRoles only assumes you have User model
+SimpleRoles requires you have User model. That's all.
 
 ### Not a Gem yet
 
@@ -33,10 +33,76 @@ SimpleRoles.configure do |config|
 end
 ```
 
-### Choosing Strategy
-...
+or in a nicer way:
 
-### Copy and migrate SimpleRoles migrations by following rake task:
+```ruby
+# config/initializers/simple_roles.rb
+SimpleRoles.configure do
+  valid_roles :user, :admin, :editor
+  strategy :many # Default is :one
+end
+```
+
+Now it is time to choose beetween two strategies possible:
+
+* One - each of your users has only one role. It is the most common
+  choise for the most of the apps.
+* Many - your user can be _:editor_ and _:curator_ and _:instructor_ all
+  at the same time. More rare one, setup is slightly more complex.
+
+### One Strategy
+
+One strategy assumes your User model has string-typed 'role' column. Add this to your migrations and run them:
+
+```ruby
+class CreateUsers < ActiveRecord::Migration
+  def up
+    create_table(:users) do |t|
+      # ...
+      t.string :role
+      # ... 
+    end
+  end
+
+  def down
+    drop_table :users
+  end
+end
+```
+
+Finally, include 'simple_roles' macros in your User model:
+
+```ruby
+class User
+  simple_roles
+end
+```
+
+### Many strategy
+
+In its background 'Many' strategy has following setup, based on <i>has_many :through</i> relations:
+
+```ruby
+class User < ActiveRecord::Base
+  has_many :user_roles
+  has_many :roles, :through => :user_roles
+end
+  
+class UserRole < ActiveRecord::Base
+  belongs_to :user
+  belongs_to :role
+end
+
+class Role < ActiveRecord::Base
+  has_many :user_roles
+  has_many :users, :through => :user_roles
+end
+```
+
+You don't need to write them - all this classes SimpleRoles configures
+automatically. But you need to supply migrations for them:
+
+Copy and migrate SimpleRoles migrations by following rake task
 
 ```ruby
 rake simple_roles_engine:install:migrations
@@ -45,7 +111,9 @@ rake db:migrate
 
 Note! Migrations are based on roles you set up as valid (see previous step). If you do not create initializer with valid_roles, then valid_roles will be set up to defaults: :user and :admin.
 
-### And finally include 'simple_roles' macros in your User model:
+And finally include 'simple_roles' macros in your User model:
+
+### Finally
 
 ```ruby
 class User
@@ -53,14 +121,28 @@ class User
 end
 ```
 
-## Usage
+You can skip configuration in initializers and write it the following
+way:
 
 ```ruby
+class User
+  simple_roles do
+    strategy :one # Your strategy here
+    valid_roles :user, :editor
+  end
+end
+```
+
+## Usage example
+
+```ruby
+user = User.new
 user.roles # => []
 
 user.roles = :admin
 user.roles # => [:admin]
 user.roles_list # => [:admin]
+
 user.admin? # => true
 user.is_admin? # => true
 
