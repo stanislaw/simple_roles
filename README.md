@@ -21,7 +21,7 @@ gem 'simple_roles', :git => "git://github.com/stanislaw/simple_roles.git"
 bundle update
 ```
 
-### Set up valid roles you're gonna have in your app
+### Set up valid roles you're gonna have in your app and choose a Strategy. 
 
 Create file simple_roles.rb in config/initializers and write there:
 
@@ -99,21 +99,18 @@ class Role < ActiveRecord::Base
 end
 ```
 
-You don't need to write them - all this classes SimpleRoles configures
-automatically. But you need to supply migrations for them:
+**You don't need to write them by hands** - all these classes SimpleRoles configures **automatically**. 
 
-Copy and migrate SimpleRoles migrations by following rake task
+But you need to supply migrations for them - copy and migrate SimpleRoles migrations by following rake task:
 
 ```ruby
 rake simple_roles_engine:install:migrations
 rake db:migrate
 ```
 
-Note! Migrations are based on roles you set up as valid (see previous step). If you do not create initializer with valid_roles, then valid_roles will be set up to defaults: :user and :admin.
+Note! Migrations are based on roles you are to set up as valid (see previous step). If you do not create initializer with valid_roles, then valid_roles will be set up to defaults: :user and :admin.
 
 And finally include 'simple_roles' macros in your User model:
-
-### Finally
 
 ```ruby
 class User
@@ -121,13 +118,15 @@ class User
 end
 ```
 
+### Notes
+
 You can skip configuration in initializers and write it the following
 way:
 
 ```ruby
 class User
   simple_roles do
-    strategy :one # Your strategy here
+    strategy :one
     valid_roles :user, :editor
   end
 end
