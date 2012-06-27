@@ -9,4 +9,4 @@ env:
   - DB=sqlite
   - DB=mysql
 before_script:
-  - "mysql -e 'create database myapp_test;' >/dev/null"
+  - "mysql -e 'create database simple_roles_test;' >/dev/null"
