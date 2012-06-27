@@ -4,19 +4,20 @@
 # -*- encoding: utf-8 -*-
 
 Gem::Specification.new do |s|
-  s.name = %q{simple_roles}
-  s.version = "0.0.5"
+  s.name = "simple_roles"
+  s.version = "0.0.6"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
-  s.authors = [%q{stanislaw}]
-  s.date = %q{2011-10-14}
-  s.description = %q{Simple Role System for Rails Apps}
-  s.email = %q{s.pankevich@gmail.com}
+  s.authors = ["stanislaw"]
+  s.date = "2012-06-27"
+  s.description = "Simple Role System for Rails Apps"
+  s.email = "s.pankevich@gmail.com"
   s.extra_rdoc_files = [
     "README.md"
   ]
   s.files = [
     ".rspec",
+    "CHANGELOG.md",
     "Gemfile",
     "MIT-LICENSE",
     "README.md",
@@ -36,11 +37,16 @@ Gem::Specification.new do |s|
     "db/migrate/001_create_user_roles.rb",
     "db/migrate/002_create_roles.rb",
     "lib/simple_roles.rb",
-    "lib/simple_roles/base.rb",
     "lib/simple_roles/configuration.rb",
     "lib/simple_roles/engine.rb",
     "lib/simple_roles/macros.rb",
-    "lib/simple_roles/roles_array.rb",
+    "lib/simple_roles/many.rb",
+    "lib/simple_roles/many/persistence.rb",
+    "lib/simple_roles/many/roles_methods.rb",
+    "lib/simple_roles/one.rb",
+    "lib/simple_roles/one/persistence.rb",
+    "lib/simple_roles/one/roles_methods.rb",
+    "lib/simple_roles/packager.rb",
     "lib/simple_roles/version.rb",
     "lib/tasks/simple_roles_tasks.rake",
     "script/rails",
@@ -125,25 +131,31 @@ Gem::Specification.new do |s|
     "spec/dummy/test/unit/user_test.rb",
     "spec/dummy_spec_helper.rb",
     "spec/integration/main_spec.rb",
-    "spec/integration/messages_spec.rb",
     "spec/integration/requests/main_spec.rb",
-    "spec/simple_roles/base_spec.rb",
+    "spec/simple_roles/configuration_spec.rb",
+    "spec/simple_roles/integration_many_spec.rb",
     "spec/simple_roles/macros_spec.rb",
+    "spec/simple_roles/many/persistence_spec.rb",
+    "spec/simple_roles/many_spec.rb",
+    "spec/simple_roles/one_spec.rb",
     "spec/spec_helper.rb",
-    "spec/support/aliases.rb",
     "spec/support/controller_macros.rb",
     "spec/support/database.yml",
     "spec/support/factories.rb",
-    "spec/support/fixtures/models/.gitkeep",
-    "spec/support/fixtures/models/user.rb",
-    "spec/support/migrations/010_create_users.rb",
-    "spec/support/rspec_helpers.rb"
+    "spec/support/migrations/010_create_one_users.rb",
+    "spec/support/migrations/011_create_users.rb",
+    "spec/support/models/.gitkeep",
+    "spec/support/models/one_user.rb",
+    "spec/support/models/user.rb",
+    "spec/support/setup_roles.rb",
+    "spec/support/transaction.rb",
+    "spec/transaction_spec.rb"
   ]
-  s.homepage = %q{http://github.com/stanislaw/simple_roles}
-  s.licenses = [%q{MIT}]
-  s.require_paths = [%q{lib}]
-  s.rubygems_version = %q{1.8.8}
-  s.summary = %q{Rails Engine providing Role System for Rails apps}
+  s.homepage = "http://github.com/stanislaw/simple_roles"
+  s.licenses = ["MIT"]
+  s.require_paths = ["lib"]
+  s.rubygems_version = "1.8.19"
+  s.summary = "Rails Engine providing Role System for Rails apps"
 
   if s.respond_to? :specification_version then
     s.specification_version = 3
@@ -152,15 +164,13 @@ Gem::Specification.new do |s|
       s.add_runtime_dependency(%q<require_all>, [">= 0"])
       s.add_runtime_dependency(%q<sugar-high>, [">= 0"])
       s.add_runtime_dependency(%q<sweetloader>, [">= 0"])
-      s.add_development_dependency(%q<activerecord>, [">= 0"])
+      s.add_runtime_dependency(%q<activerecord>, [">= 0"])
       s.add_development_dependency(%q<rake-kit>, [">= 0"])
       s.add_development_dependency(%q<devise>, [">= 0"])
       s.add_development_dependency(%q<mysql2>, [">= 0"])
       s.add_development_dependency(%q<jeweler>, [">= 0"])
       s.add_development_dependency(%q<cutter>, [">= 0"])
-      s.add_development_dependency(%q<rails>, [">= 0"])
-      s.add_development_dependency(%q<rspec-rails>, [">= 0"])
-      s.add_development_dependency(%q<capybara>, [">= 0"])
+      s.add_development_dependency(%q<rspec>, [">= 0"])
       s.add_development_dependency(%q<factory_girl>, [">= 0"])
     else
       s.add_dependency(%q<require_all>, [">= 0"])
@@ -172,9 +182,7 @@ Gem::Specification.new do |s|
       s.add_dependency(%q<mysql2>, [">= 0"])
       s.add_dependency(%q<jeweler>, [">= 0"])
       s.add_dependency(%q<cutter>, [">= 0"])
-      s.add_dependency(%q<rails>, [">= 0"])
-      s.add_dependency(%q<rspec-rails>, [">= 0"])
-      s.add_dependency(%q<capybara>, [">= 0"])
+      s.add_dependency(%q<rspec>, [">= 0"])
       s.add_dependency(%q<factory_girl>, [">= 0"])
     end
   else
@@ -187,9 +195,7 @@ Gem::Specification.new do |s|
     s.add_dependency(%q<mysql2>, [">= 0"])
     s.add_dependency(%q<jeweler>, [">= 0"])
     s.add_dependency(%q<cutter>, [">= 0"])
-    s.add_dependency(%q<rails>, [">= 0"])
-    s.add_dependency(%q<rspec-rails>, [">= 0"])
-    s.add_dependency(%q<capybara>, [">= 0"])
+    s.add_dependency(%q<rspec>, [">= 0"])
     s.add_dependency(%q<factory_girl>, [">= 0"])
   end
 end
