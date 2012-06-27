@@ -10,15 +10,14 @@ If you are looking for a real serious roles system solution try [Troles](https:/
 
 ### Prerequisites
 
-SimpleRoles requires you have User model. That's all.
+SimpleRoles requires you have have User model in your Rails app. That's all.
 
-### Not a Gem yet
+### It is a Gem
 
 include in Gemfile:
 
 ```ruby
-gem 'simple_roles', :git => "git://github.com/stanislaw/simple_roles.git"
-bundle update
+gem 'simple_roles' 
 ```
 
 ### Set up valid roles you're gonna have in your app and choose a Strategy. 
