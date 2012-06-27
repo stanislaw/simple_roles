@@ -16,5 +16,5 @@ group :development, :test do
   gem 'jeweler'
   gem 'cutter'
   gem 'rspec'
-  gem 'factory_girl'
+  gem 'factory_girl', '2.6.4'
 end

@@ -1,0 +1,12 @@
+language: ruby
+rvm:
+  - 1.8.7
+  - 1.9.3
+script: "bundle exec rspec spec"
+gemfile:
+  - Gemfile
+env:
+  - DB=sqlite
+  - DB=mysql
+before_script:
+  - "mysql -e 'create database myapp_test;' >/dev/null"
