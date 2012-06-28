@@ -146,6 +146,9 @@ user.role = :admin
 user.role # => :admin
 user.admin? # => true
 user.is_admin? # => true
+user.has_role? :admin # => true
+user.has_role? :user # => false
+user.has_any_role? :user, :editor, :admin # => true
 
 # Accepts strings too 
 user.role = 'instructor'

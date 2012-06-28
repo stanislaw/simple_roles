@@ -73,6 +73,25 @@ describe SimpleRoles::One do
       end
     end
 
+    it "#has_role?" do
+      user.role = :admin
+
+      user.has_role?(:admin).should be_true
+      user.has_role?(:editor).should be_false
+
+      user.role = :user
+
+      user.has_role?(:user).should be_true
+      user.has_role?(:admin).should be_false
+    end
+
+    it "#has_any_role?" do
+      user.role = :admin
+
+      user.has_any_role?(:admin, :editor).should be_true
+      user.has_any_role?(:editor, :user).should be_false
+    end
+    
     describe "Dynamic methods" do
       SimpleRoles.config.valid_roles.each do |r|
         specify { user.should respond_to :"#{r}?" }

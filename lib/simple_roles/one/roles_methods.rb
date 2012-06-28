@@ -15,6 +15,18 @@ module SimpleRoles
       end
       alias_method :update_role, :set_role
 
+      def has_role? r
+        role == r
+      end
+
+      def has_any_role? *rolez
+        rolez.flatten!
+
+        rolez.any? do |r|
+          has_role? r
+        end
+      end
+      
       module DynamicMethods
         class << self
           def extended base
