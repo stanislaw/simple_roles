@@ -2,7 +2,7 @@
 
 SimpleRoles is a Rails Engine providing simple Role System for any Rails 3 app. 
 
-Initially, it was created as demo role-system to accompany [CanTango gem](https://github.com/kristianmandrup/cantango) initial installiation and usage, and intended to be very easy to setup & use.
+Initially it was created as demo role-system to accompany [CanTango gem](https://github.com/kristianmandrup/cantango) initial installiation and usage, and intended to be very easy to setup & use.
 
 Now it is good to be used as a real role system inspite of or due to its almost maximum simplicity.
 
@@ -24,7 +24,7 @@ gem 'simple_roles'
 
 ### Set up valid roles you're gonna have in your app and choose a Strategy. 
 
-Create file simple_roles.rb in config/initializers and write there:
+Create file simple_roles.rb in config/initializers and write in it:
 
 ```ruby
 # config/initializers/simple_roles.rb
@@ -47,7 +47,7 @@ end
 Now it is time to choose beetween two strategies possible:
 
 * One - each of your users has only one role. It is the most common
-  choise for the most of the apps.
+  choice for the most of the apps.
 * Many - your user can be _:editor_ and _:curator_ and _:instructor_ all
   at the same time. More rare one, setup is slightly more complex.
 
@@ -61,7 +61,6 @@ class CreateUsers < ActiveRecord::Migration
     create_table(:users) do |t|
       # ...
       t.string :role
-      # ... 
     end
   end
 
