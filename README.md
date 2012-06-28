@@ -190,7 +190,7 @@ user.has_role?(:blogger) # => false
 
 ### Both strategies
 
-For each of valid role both strategies automatically define scope methods in User model:
+For each of valid roles both strategies automatically define scope methods in User model:
 
 ```ruby
 SimpleRoles.config.valid_roles # => [:user, :admin, :editor]
