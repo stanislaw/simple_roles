@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = "simple_roles"
-  s.version = "0.0.7"
+  s.version = "0.0.8"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["stanislaw"]
-  s.date = "2012-06-27"
+  s.date = "2012-06-28"
   s.description = "Simple Role System for Rails Apps"
   s.email = "s.pankevich@gmail.com"
   s.extra_rdoc_files = [
@@ -17,6 +17,7 @@ Gem::Specification.new do |s|
   ]
   s.files = [
     ".rspec",
+    ".travis.yml",
     "CHANGELOG.md",
     "Gemfile",
     "MIT-LICENSE",
@@ -172,7 +173,7 @@ Gem::Specification.new do |s|
       s.add_development_dependency(%q<jeweler>, [">= 0"])
       s.add_development_dependency(%q<cutter>, [">= 0"])
       s.add_development_dependency(%q<rspec>, [">= 0"])
-      s.add_development_dependency(%q<factory_girl>, [">= 0"])
+      s.add_development_dependency(%q<factory_girl>, ["= 2.6.4"])
     else
       s.add_dependency(%q<require_all>, [">= 0"])
       s.add_dependency(%q<sugar-high>, [">= 0"])
@@ -184,7 +185,7 @@ Gem::Specification.new do |s|
       s.add_dependency(%q<jeweler>, [">= 0"])
       s.add_dependency(%q<cutter>, [">= 0"])
       s.add_dependency(%q<rspec>, [">= 0"])
-      s.add_dependency(%q<factory_girl>, [">= 0"])
+      s.add_dependency(%q<factory_girl>, ["= 2.6.4"])
     end
   else
     s.add_dependency(%q<require_all>, [">= 0"])
@@ -197,7 +198,7 @@ Gem::Specification.new do |s|
     s.add_dependency(%q<jeweler>, [">= 0"])
     s.add_dependency(%q<cutter>, [">= 0"])
     s.add_dependency(%q<rspec>, [">= 0"])
-    s.add_dependency(%q<factory_girl>, [">= 0"])
+    s.add_dependency(%q<factory_girl>, ["= 2.6.4"])
   end
 end
 
