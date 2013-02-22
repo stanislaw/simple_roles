@@ -52,7 +52,6 @@ module SimpleRoles
       def has_roles? *rolez
         rolez.flatten!
 
-        # rrr roles
         rolez.all? do |role|
           roles.include? role
         end

@@ -1,6 +1,10 @@
-# master
+# Master
 
-...
+# Version 0.0.9
+
+### Changed
+
+* Many strategy (persistence): setter `roles=` does not call save anymore, so it does not persist new records! 
 
 # Version 0.0.6
 

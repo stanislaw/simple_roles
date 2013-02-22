@@ -79,6 +79,7 @@ describe SimpleRoles::Many do
     it "#roles= should not persist the user when being set" do
       unsaved_user = build :user
       unsaved_user.roles = [:admin]
+      unsaved_user.roles.should == [:admin]
       unsaved_user.should_not be_persisted
     end
 
