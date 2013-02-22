@@ -18,8 +18,6 @@ module SimpleRoles
         rolez.to_symbols!.flatten!
 
         super retrieve_roles(rolez)
-
-        save!
       end
 
       private
