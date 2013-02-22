@@ -1,12 +1,12 @@
-# Master
+# CHANGELOG
 
-# Version 0.0.9
+## 0.0.9
 
 ### Changed
 
 * Many strategy (persistence): setter `roles=` does not call save anymore, so it does not persist new records! 
 
-# Version 0.0.6
+## 0.0.6
 
 ### Added
 
@@ -20,6 +20,6 @@
 
 * Removed RolesArray presenter in "Many" strategy
 
-# Versions <= 0.0.5 
+## Prior to 0.0.6 
 
 Long-long history here undocumented...
