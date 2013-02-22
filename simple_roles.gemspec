@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = "simple_roles"
-  s.version = "0.0.8"
+  s.version = "0.0.9"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["stanislaw"]
-  s.date = "2012-06-28"
+  s.date = "2013-02-22"
   s.description = "Simple Role System for Rails Apps"
   s.email = "s.pankevich@gmail.com"
   s.extra_rdoc_files = [
@@ -23,7 +23,6 @@ Gem::Specification.new do |s|
     "MIT-LICENSE",
     "README.md",
     "Rakefile",
-    "VERSION",
     "app/assets/images/simple_roles/.gitkeep",
     "app/assets/javascripts/simple_roles/.gitkeep",
     "app/assets/stylesheets/simple_roles/.gitkeep",
@@ -156,7 +155,7 @@ Gem::Specification.new do |s|
   s.homepage = "http://github.com/stanislaw/simple_roles"
   s.licenses = ["MIT"]
   s.require_paths = ["lib"]
-  s.rubygems_version = "1.8.19"
+  s.rubygems_version = "1.8.24"
   s.summary = "Rails Engine providing Role System for Rails apps"
 
   if s.respond_to? :specification_version then
