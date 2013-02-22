@@ -75,7 +75,7 @@ describe SimpleRoles::Many do
       subject.roles = ['user', 'editor']
       subject.roles.should == Array.new([:user, :editor])
     end
-    
+
     it "#remove_roles should remove roles" do
       subject.roles = [ :admin, :user, :editor ]
 
@@ -86,6 +86,19 @@ describe SimpleRoles::Many do
   
       subject.remove_roles :admin, :user, :editor
       subject.roles.should == Array.new([])
+    end
+
+    it "#roles= should not persist the user when being set" do
+      unsaved_user = build :user
+      unsaved_user.roles = [:admin]
+      unsaved_user.should_not be_persisted
+    end
+
+    it "#roles= should store the roles to be saved when user is persisted" do
+      unsaved_user = build :user
+      unsaved_user.roles = [:admin]
+      unsaved_user.save!
+      unsaved_user.reload.roles.should == [:admin]
     end
   end
 

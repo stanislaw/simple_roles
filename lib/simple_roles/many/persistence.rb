@@ -6,23 +6,31 @@ module SimpleRoles
           base.class_eval %{ 
             has_many :user_roles
             has_many :roles, :through => :user_roles
+            after_create :persist_roles
           }
         end
       end
 
       def roles
-        super.map(&:name).map(&:to_sym)
+        super.map(&:name).map(&:to_sym) + (@unpersisted_roles || [])
       end
 
       def roles= *rolez
         rolez.to_symbols!.flatten!
 
-        super retrieve_roles(rolez)
-
-        save!
+        if persisted?
+          super retrieve_roles(rolez)
+        else
+          @unpersisted_roles = rolez
+        end
       end
 
       private
+
+      def persist_roles
+        self.roles = @unpersisted_roles
+        @unpersisted_roles = nil
+      end
 
       def retrieve_roles rolez
         raise "Not a valid role!" if (rolez - config.valid_roles).size > 0
