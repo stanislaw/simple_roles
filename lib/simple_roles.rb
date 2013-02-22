@@ -1,20 +1,18 @@
-require 'sweetloader'
-require 'require_all'
-
-require 'sugar-high/array'
-require 'sugar-high/dsl'
-
 require 'active_record'
 
 require 'simple_roles/version'
 
-require 'simple_roles/engine' if defined?(Rails)
 require 'simple_roles/macros'
 
-require_all File.expand_path('../../app', __FILE__)
+Dir[File.expand_path('../../app/models/*', __FILE__)].each do |f|
+  require f
+end
 
 module SimpleRoles
-  autoload_modules :Configuration, :Packager, :One, :Many
+  autoload :Configuration, 'simple_roles/configuration'
+  autoload :Packager, 'simple_roles/packager'
+  autoload :One, 'simple_roles/one'
+  autoload :Many, 'simple_roles/many'
 
   extend self
 
@@ -29,6 +27,6 @@ module SimpleRoles
   def packager
     SimpleRoles::Packager
   end
-  
+
   delegate :package, :to => :packager, :prefix => false
 end

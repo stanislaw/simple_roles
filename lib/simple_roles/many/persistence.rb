@@ -15,7 +15,7 @@ module SimpleRoles
       end
 
       def roles= *rolez
-        rolez.to_symbols!.flatten!
+        rolez = rolez.flatten.map(&:to_sym)
 
         super retrieve_roles(rolez)
       end

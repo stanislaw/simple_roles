@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## 0.0.10
+
+### Removed
+
+* Removed runtime dependencies: sugar-high, require_all, sweetloader
+
 ## 0.0.9
 
 ### Changed
