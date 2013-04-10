@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = "simple_roles"
-  s.version = "0.0.10"
+  s.version = "0.0.11"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["stanislaw"]
-  s.date = "2013-02-22"
+  s.date = "2013-04-10"
   s.description = "Simple Role System for Rails Apps"
   s.email = "s.pankevich@gmail.com"
   s.extra_rdoc_files = [
@@ -31,6 +31,7 @@ Gem::Specification.new do |s|
     "db/migrate/002_create_roles.rb",
     "lib/simple_roles.rb",
     "lib/simple_roles/configuration.rb",
+    "lib/simple_roles/engine.rb",
     "lib/simple_roles/macros.rb",
     "lib/simple_roles/many.rb",
     "lib/simple_roles/many/persistence.rb",
@@ -154,7 +155,7 @@ Gem::Specification.new do |s|
     s.specification_version = 3
 
     if Gem::Version.new(Gem::VERSION) >= Gem::Version.new('1.2.0') then
-      s.add_runtime_dependency(%q<activerecord>, [">= 0"])
+      s.add_runtime_dependency(%q<activerecord>, [">= 3.1.0"])
       s.add_development_dependency(%q<rake-kit>, [">= 0"])
       s.add_development_dependency(%q<devise>, [">= 0"])
       s.add_development_dependency(%q<mysql2>, [">= 0"])
@@ -165,7 +166,7 @@ Gem::Specification.new do |s|
       s.add_development_dependency(%q<rspec>, [">= 0"])
       s.add_development_dependency(%q<factory_girl>, ["= 2.6.4"])
     else
-      s.add_dependency(%q<activerecord>, [">= 0"])
+      s.add_dependency(%q<activerecord>, [">= 3.1.0"])
       s.add_dependency(%q<rake-kit>, [">= 0"])
       s.add_dependency(%q<devise>, [">= 0"])
       s.add_dependency(%q<mysql2>, [">= 0"])
@@ -177,7 +178,7 @@ Gem::Specification.new do |s|
       s.add_dependency(%q<factory_girl>, ["= 2.6.4"])
     end
   else
-    s.add_dependency(%q<activerecord>, [">= 0"])
+    s.add_dependency(%q<activerecord>, [">= 3.1.0"])
     s.add_dependency(%q<rake-kit>, [">= 0"])
     s.add_dependency(%q<devise>, [">= 0"])
     s.add_dependency(%q<mysql2>, [">= 0"])
