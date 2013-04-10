@@ -1,6 +1,8 @@
 module SimpleRoles
   class Engine < Rails::Engine
-    initializer 'simple_roles' do |app|
-    end
+    engine_name 'simple_roles'
+
+    # initializer 'simple_roles' do |app|
+    # end
   end
 end
