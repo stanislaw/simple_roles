@@ -25,7 +25,7 @@ Jeweler::RubygemsDotOrgTasks.new
 
 APP_RAKEFILE = File.expand_path("../spec/dummy/Rakefile", __FILE__)
 
-if File.exists?(APP_RAKEFILE)
+if File.exists?(APP_RAKEFILE) && defined?(Rails)
   load 'rails/tasks/engine.rake'
 end
 
