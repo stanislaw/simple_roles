@@ -4,6 +4,8 @@ require 'simple_roles/version'
 
 require 'simple_roles/macros'
 
+require 'simple_roles/engine' if defined?(Rails)
+
 Dir[File.expand_path('../../app/models/*', __FILE__)].each do |f|
   require f
 end
