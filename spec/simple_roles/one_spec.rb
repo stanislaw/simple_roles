@@ -1,9 +1,13 @@
 require 'spec_helper'
 
+SimpleRoles.configure do |config|
+  config.valid_roles = [:user, :admin, :editor]
+end
+
 describe SimpleRoles::One do
   subject { SimpleRoles::One }
   let(:user) { create :one_user, :role => 'user' }
-  
+
   before(:all) do
     SimpleRoles::Packager.package OneUser, :one
   end
@@ -59,7 +63,7 @@ describe SimpleRoles::One do
         user.role.should == :admin
       end
     end
-    
+
     describe "#update_role" do
       it "should set role" do
         user.update_role(:admin)
@@ -91,7 +95,7 @@ describe SimpleRoles::One do
       user.has_any_role?(:admin, :editor).should be_true
       user.has_any_role?(:editor, :user).should be_false
     end
-    
+
     describe "Dynamic methods" do
       SimpleRoles.config.valid_roles.each do |r|
         specify { user.should respond_to :"#{r}?" }
@@ -106,7 +110,7 @@ describe SimpleRoles::One do
           user.user?.should == true
         end
       end
-      
+
       describe "#is_user?, #is_admin?, ..." do
         specify do
           user.set_role(:admin)
@@ -115,6 +119,21 @@ describe SimpleRoles::One do
           user.set_role(:user)
           user.is_user?.should == true
         end
+      end
+    end
+  end
+
+  describe "Scope methods" do
+    subject { OneUser }
+
+    SimpleRoles.config.valid_roles.each do |role|
+      it { should respond_to :"#{role}s" }
+
+      it "should return the users of role :#{role}" do
+        user = create(:one_user, :role => role)
+
+        OneUser.send(:"#{role}s").count.should == 1
+        OneUser.send(:"#{role}s").should include user
       end
     end
   end

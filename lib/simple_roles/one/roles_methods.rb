@@ -26,7 +26,7 @@ module SimpleRoles
           has_role? r
         end
       end
-      
+
       module DynamicMethods
         class << self
           def extended base
@@ -36,8 +36,12 @@ module SimpleRoles
 
         def register_dynamic_methods
           SimpleRoles.config.valid_roles.each do |r|
-            scope :"#{r}s", where(:role => r.to_s)
-            
+            self.class_eval %{
+              def self.#{r}s
+                where(:role => :#{r})
+              end
+            }
+
             define_method :"#{r}?" do
               role == r
             end

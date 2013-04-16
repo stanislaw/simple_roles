@@ -5,6 +5,7 @@ source "http://rubygems.org"
 # development dependencies will be added by default to the :development group.
 
 gem 'activerecord', '>=3.1.0'
+# gem 'activerecord', '4.0.0.beta1'
 
 group :development, :test do
   gem 'rake-kit'
@@ -16,4 +17,5 @@ group :development, :test do
   gem 'cutter'
   gem 'rspec'
   gem 'factory_girl', '2.6.4'
+  gem 'database_cleaner'
 end
