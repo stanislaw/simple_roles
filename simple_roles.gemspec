@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = "simple_roles"
-  s.version = "0.0.11"
+  s.version = "0.0.12"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["stanislaw"]
-  s.date = "2013-04-10"
+  s.date = "2013-04-16"
   s.description = "Simple Role System for Rails Apps"
   s.email = "s.pankevich@gmail.com"
   s.extra_rdoc_files = [
@@ -123,13 +123,10 @@ Gem::Specification.new do |s|
     "spec/dummy/test/unit/post_test.rb",
     "spec/dummy/test/unit/user_test.rb",
     "spec/dummy_spec_helper.rb",
-    "spec/integration/main_spec.rb",
-    "spec/integration/requests/main_spec.rb",
     "spec/simple_roles/configuration_spec.rb",
     "spec/simple_roles/integration_many_spec.rb",
     "spec/simple_roles/integration_one_spec.rb",
     "spec/simple_roles/macros_spec.rb",
-    "spec/simple_roles/many/persistence_spec.rb",
     "spec/simple_roles/many_spec.rb",
     "spec/simple_roles/one_spec.rb",
     "spec/spec_helper.rb",
@@ -141,9 +138,7 @@ Gem::Specification.new do |s|
     "spec/support/models/.gitkeep",
     "spec/support/models/one_user.rb",
     "spec/support/models/user.rb",
-    "spec/support/setup_roles.rb",
-    "spec/support/transaction.rb",
-    "spec/transaction_spec.rb"
+    "spec/support/setup_roles.rb"
   ]
   s.homepage = "http://github.com/stanislaw/simple_roles"
   s.licenses = ["MIT"]
@@ -165,6 +160,7 @@ Gem::Specification.new do |s|
       s.add_development_dependency(%q<cutter>, [">= 0"])
       s.add_development_dependency(%q<rspec>, [">= 0"])
       s.add_development_dependency(%q<factory_girl>, ["= 2.6.4"])
+      s.add_development_dependency(%q<database_cleaner>, [">= 0"])
     else
       s.add_dependency(%q<activerecord>, [">= 3.1.0"])
       s.add_dependency(%q<rake-kit>, [">= 0"])
@@ -176,6 +172,7 @@ Gem::Specification.new do |s|
       s.add_dependency(%q<cutter>, [">= 0"])
       s.add_dependency(%q<rspec>, [">= 0"])
       s.add_dependency(%q<factory_girl>, ["= 2.6.4"])
+      s.add_dependency(%q<database_cleaner>, [">= 0"])
     end
   else
     s.add_dependency(%q<activerecord>, [">= 3.1.0"])
@@ -188,6 +185,7 @@ Gem::Specification.new do |s|
     s.add_dependency(%q<cutter>, [">= 0"])
     s.add_dependency(%q<rspec>, [">= 0"])
     s.add_dependency(%q<factory_girl>, ["= 2.6.4"])
+    s.add_dependency(%q<database_cleaner>, [">= 0"])
   end
 end
 
