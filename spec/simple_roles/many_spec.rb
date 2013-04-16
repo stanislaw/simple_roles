@@ -106,12 +106,12 @@ describe SimpleRoles::Many do
   context "Integration for roles methods" do
     it "should work when #flatten is called over #roles" do
       user.roles = [ :admin ]
-      
+
       user.roles_list.should == Array.new([:admin])
       user.roles_list.flatten.should == Array.new([:admin])
     end
 
-    # Need to investigate how stuff like that this done in Rails 4
+    # Need to investigate how stuff like that is done in Rails 4
     pending "should add :roles to accessible_attributes if they are Whitelisted" do
       user.roles = [ :admin ]
 
