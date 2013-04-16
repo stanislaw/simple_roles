@@ -1,7 +1,7 @@
 module SimpleRoles
   module Configuration
     extend self
-    
+
     attr_writer :strategy, :user_models
 
     def user_models
@@ -78,7 +78,7 @@ module SimpleRoles
         end
       end if strategy == :many
     end
-    
+
     def default_strategy
       :one
     end

@@ -40,7 +40,8 @@ ActiveRecord::Base.establish_connection(dbconfig)
 
 # ActiveRecord::Base.logger = Logger.new(STDERR)
 
-DatabaseCleaner.strategy = :truncation, { :pre_count => true, :reset_ids => true }
+# TODO: do not preserve roles table
+DatabaseCleaner.strategy = :truncation, { :except => %w[roles], :pre_count => true, :reset_ids => true }
 
 RSpec.configure do |config|
   config.mock_with :rspec
