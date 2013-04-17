@@ -13,7 +13,7 @@ Now it is good to be used as a real role system inspite of or due to its almost 
 ### Prerequisites
 
 * Ruby 1.8.7 or 1.9.3
-* Rails 3
+* Rails 3 or 4
 * ActiveRecord with MySQL or SQLite
 * ```User``` model in your Rails app.
 
