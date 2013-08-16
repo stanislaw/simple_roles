@@ -17,7 +17,7 @@ module SimpleRoles
 
         valid_roles = SimpleRoles.config.valid_roles
 
-        raise "Not a valid role! Try on of: #{valid_roles.join(', ')}" if ([role.to_sym] - valid_roles).size > 0
+        raise "Not a valid role! Try one of these: #{valid_roles.join(', ')}" if ([role.to_sym] - valid_roles).size > 0
       end
     end
   end
