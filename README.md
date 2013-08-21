@@ -107,7 +107,7 @@ end
 **But you need** to supply migrations for them - copy and migrate SimpleRoles migrations by following rake task:
 
 ```ruby
-rake simple_roles_engine:install:migrations
+rake simple_roles:install:migrations
 rake db:migrate
 ```
 
