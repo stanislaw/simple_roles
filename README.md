@@ -8,7 +8,7 @@ Now it is good to be used as a real role system inspite of or due to its almost 
 
 [![Build Status](https://secure.travis-ci.org/stanislaw/simple_roles.png)](http://travis-ci.org/stanislaw/simple_roles)
 
-## Installiation
+## Installation
 
 ### Prerequisites
 
