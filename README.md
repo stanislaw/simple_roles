@@ -8,6 +8,10 @@ Now it is good to be used as a real role system inspite of or due to its almost 
 
 [![Build Status](https://secure.travis-ci.org/stanislaw/simple_roles.png)](http://travis-ci.org/stanislaw/simple_roles)
 
+__September 18, 2014. Status Update__
+
+I do not maintain this project anymore. I am ready to pass it to any other developer if he wants to take lead on simple_roles: since time I switched to development for iOS some time ago, now I would redesign simple_roles to support different adapters other than ActiveRecord/MySQL and would rewrite its internal code to have more clear and correct design, so if you're interested I can share my thoughts with you and pass this project to you so it will live on.
+
 ## Installation
 
 ### Prerequisites
